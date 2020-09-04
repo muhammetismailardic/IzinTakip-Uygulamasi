@@ -10,7 +10,6 @@ namespace IzinTakip.UI.Controllers
     {
         public IActionResult Index()
         {
-            //sisis
             return View();
         }
     }
