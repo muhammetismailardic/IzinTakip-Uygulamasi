@@ -1,0 +1,45 @@
+﻿@model IzinTakip.Entities.Concrete.EmployeeSpecialLeave
+@{
+    ViewData["Title"] = "Edit Special Leave";
+}
+
+<!-- Basic form -->
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <header class="panel-heading">Update Special Leave Details.</header>
+        <div class="panel-body">
+            <form role="form" asp-action="Edit" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input asp-for="Id" class="form-control" type="hidden"/>
+                <input asp-for="EmployeeId" class="form-control" type="hidden"/>
+                <input asp-for="CreatedAt" class="form-control" type="hidden"/>
+                <input asp-for="IsOnLeave" class="form-control" type="hidden"/>
+                <div class="form-group">
+                    <label asp-for="Text" class="control-label"></label>
+                    <input asp-for="Text" class="form-control" />
+                    <span asp-validation-for="Text" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="StartDate" class="control-label"></label>
+                    <input type="date" asp-for="StartDate" class="form-control" />
+                    <span asp-validation-for="StartDate" class="text-danger"></span>
+
+                    <label asp-for="EndDate" class="control-label"></label>
+                    <input type="date" asp-for="EndDate" class="form-control" />
+                    <span asp-validation-for="EndDate" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Edit" class="btn btn-success" />
+                    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

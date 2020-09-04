@@ -1,0 +1,17 @@
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.DataAccess\bin\Release\netcoreapp3.1\IzinTakip.DataAccess.deps.json
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.DataAccess\bin\Release\netcoreapp3.1\IzinTakip.DataAccess.runtimeconfig.json
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.DataAccess\bin\Release\netcoreapp3.1\IzinTakip.DataAccess.runtimeconfig.dev.json
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.DataAccess\bin\Release\netcoreapp3.1\IzinTakip.DataAccess.dll
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.DataAccess\bin\Release\netcoreapp3.1\IzinTakip.DataAccess.pdb
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.DataAccess\bin\Release\netcoreapp3.1\IzinTakip.Core.dll
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.DataAccess\bin\Release\netcoreapp3.1\IzinTakip.Entities.dll
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.DataAccess\bin\Release\netcoreapp3.1\IzinTakip.Core.pdb
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.DataAccess\bin\Release\netcoreapp3.1\IzinTakip.Entities.pdb
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.DataAccess\obj\Release\netcoreapp3.1\IzinTakip.DataAccess.csprojAssemblyReference.cache
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.DataAccess\obj\Release\netcoreapp3.1\IzinTakip.DataAccess.AssemblyInfoInputs.cache
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.DataAccess\obj\Release\netcoreapp3.1\IzinTakip.DataAccess.AssemblyInfo.cs
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.DataAccess\obj\Release\netcoreapp3.1\IzinTakip.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.DataAccess\obj\Release\netcoreapp3.1\IzinTakip.DataAccess.csproj.CopyComplete
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.DataAccess\obj\Release\netcoreapp3.1\IzinTakip.DataAccess.dll
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.DataAccess\obj\Release\netcoreapp3.1\IzinTakip.DataAccess.pdb
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.DataAccess\obj\Release\netcoreapp3.1\IzinTakip.DataAccess.genruntimeconfig.cache

@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>İzin Takip Sistemi &dash; @ViewData["Title"]</title>
+    @*<title>@ViewBag.Title</title>*@
+
+    <!-- Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800,400italic%7cMontserrat:400,700" rel="stylesheet" type="text/css">
+    <!-- Icons -->
+    <link href="~/css/typicons.min.css" rel="stylesheet">
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- iCheck - Custom radio/check input -->
+    <link href="~/css/icheck/minimal.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <!-- All plugins -->
+    <link href="~/css/plugins.min.css" rel="stylesheet">
+    <!-- Template -->
+    <link href="~/css/main.min.css" rel="stylesheet">
+    <!-- Tag Inputs -->
+    <link href="~/css/tag-inputs/tagsinput.css" rel="stylesheet" />
+
+    <!-- Bootsrap Data Table integration input -->
+    <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+              <script src="js/plugins/shiv.min.js"></script>
+              <script src="js/plugins/respond.min.js"></script>
+              <script src="js/plugins/excanvas.min.js"></script>
+            <![endif]-->
+
+</head>
+<body>
+    <!-- Page container -->
+    <div class="page-container">
+
+        <!-- Sidebar -->
+        <aside id="sidebar">
+
+            <!-- Sidebar header -->
+            <header class="sidebar-header">
+                <h1><img src="img/logo.png" alt="Saltkin"></h1>
+                <a href="#" id="make-compact"><span class="typcn typcn-th-menu"></span></a>
+                <a href="#" id="hide-menu"><span class="fa fa-caret-square-o-left"></span></a>
+            </header>
+            <!-- /Sidebar header -->
+            <!-- Sidebar group -->
+            <ul class="sidebar-group">
+                <li class="sidebar-group-header">NAVIGATION</li>
+                <li class="has-submenu">
+                    <a href="#"><i class="typcn typcn-document-text"></i> <span>Annual Leaves</span></a>
+                    <div class="sidebar-link-addon"><i class="typcn typcn-plus"></i></div>
+                    <!-- Sidebar submenu -->
+                    <ul class="sidebar-submenu">
+                        <li><a asp-controller="Employee" asp-action="Index">Employee List</a></li>
+                        <li><a asp-controller="Employee" asp-action="Create">Add Employee</a></li>
+                    </ul>
+                    <!-- /Sidebar submenu -->
+                </li>
+
+                <li><a asp-controller="Account" asp-action="Logout"><i class="typcn typcn-arrow-forward"></i> <span>Exit</span></a></li>
+            </ul>
+        </aside>
+        <!-- /Sidebar -->
+        <!-- Content -->
+        <div id="content">
+            <!-- Header -->
+            <nav class="header-site">
+                <div class="container-fluid">
+
+                    <!-- Page title and breadcrumb navigation -->
+                    <div class="page-title">
+                        <h4><a href="#" id="toggle-menu"><i class="typcn typcn-th-menu"></i></a> <span>WELCOME!!</span></h4>
+                        <nav>
+                            <a href="#">DASHBOARD</a>
+                            <span class="typcn typcn-chevron-right"></span>
+                            <a href="#">@ViewData["Title"]</a>
+                        </nav>
+                    </div>
+                </div>
+            </nav>
+            <div class="row">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <!-- /Content -->
+
+    @if (IsSectionDefined("scripts"))
+    {
+        RenderSection("scripts");
+    }
+
+    <!-- PLUGINS -->
+    <script src="~/js/plugins/jquery.min.js"></script>
+    <script src="~/js/plugins/modernizr.min.js"></script>
+    <!-- Bootstrap core -->
+    <script src="~/js/plugins/bootstrap.min.js"></script>
+    <!-- Custom scrollbar -->
+    <script src="~/js/plugins/enscroll.min.js"></script>
+    <!-- Knob / Donut charts -->
+    <script src="~/js/plugins/knob.min.js"></script>
+    <!-- Dynamic tables -->
+    <script src="~/js/plugins/footable.min.js"></script>
+    <!-- WYSIWYG -->
+    <script src="~/js/plugins/summernote.min.js"></script>
+    <!-- Responsive multimenu -->
+    <script src="~/js/plugins/multimenu.min.js"></script>
+    <!-- Custom checkboxes and radio input -->
+    <script src="~/js/plugins/icheck.min.js"></script>
+    <!-- Rickshaw graphs & charts -->
+    <script src="~/js/plugins/sparkline.min.js"></script>
+    <script src="~/js/plugins/rickshaw/d3.v3.js"></script>
+    <script src="~/js/plugins/rickshaw/rickshaw.min.js"></script>
+    <!-- Flot -->
+    <script src="~/js/plugins/flot.min.js"></script>
+    <!-- Calendar -->
+    <script src="~/js/plugins/calendar/underscore.min.js"></script>
+    <script src="~/js/plugins/calendar/calendar.min.js"></script>
+    <!-- Masked input -->
+    <script src="~/js/plugins/maskedinput.min.js"></script>
+    <!-- Date and time picker -->
+    <script src="~/js/plugins/datepicker/moment.min.js"></script>
+    <script src="~/js/plugins/datepicker/datetimepicker.min.js"></script>
+    <!-- Page specific -->
+    <script src="~/js/page-form-elements.js"></script>
+    <!-- Site -->
+    <script src="~/js/main.js"></script>
+
+    <!-- Tag inputs -->
+    <script src="~/js/tag-inputs/tagsinput.js"></script>
+
+    <!-- ckeditor -->
+    <script src="~/ckeditor/ckeditor.js"></script>
+
+    <script>
+        CKEDITOR.replace('TextArea');
+    </script>
+
+    <!-- Bootsrap Data Table integration input -->
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#index-table').DataTable({
+                "lengthMenu": [[30, 50, -1], [30, 50, "All"]]
+            });
+        });
+    </script>
+
+</body>
+</html>

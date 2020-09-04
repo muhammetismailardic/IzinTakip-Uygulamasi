@@ -1,0 +1,16 @@
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Business\bin\Release\netcoreapp3.1\IzinTakip.Business.deps.json
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Business\bin\Release\netcoreapp3.1\IzinTakip.Business.dll
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Business\bin\Release\netcoreapp3.1\IzinTakip.Business.pdb
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Business\bin\Release\netcoreapp3.1\IzinTakip.Core.dll
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Business\bin\Release\netcoreapp3.1\IzinTakip.DataAccess.dll
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Business\bin\Release\netcoreapp3.1\IzinTakip.Entities.dll
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Business\bin\Release\netcoreapp3.1\IzinTakip.Core.pdb
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Business\bin\Release\netcoreapp3.1\IzinTakip.DataAccess.pdb
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Business\bin\Release\netcoreapp3.1\IzinTakip.Entities.pdb
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Business\obj\Release\netcoreapp3.1\IzinTakip.Business.csprojAssemblyReference.cache
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Business\obj\Release\netcoreapp3.1\IzinTakip.Business.AssemblyInfoInputs.cache
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Business\obj\Release\netcoreapp3.1\IzinTakip.Business.AssemblyInfo.cs
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Business\obj\Release\netcoreapp3.1\IzinTakip.Business.csproj.CoreCompileInputs.cache
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Business\obj\Release\netcoreapp3.1\IzinTakip.Business.csproj.CopyComplete
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Business\obj\Release\netcoreapp3.1\IzinTakip.Business.dll
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Business\obj\Release\netcoreapp3.1\IzinTakip.Business.pdb

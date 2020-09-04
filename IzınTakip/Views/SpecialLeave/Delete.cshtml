@@ -1,0 +1,17 @@
+﻿@model IzinTakip.Entities.Concrete.EmployeeSpecialLeave
+@{
+    ViewData["Title"] = "Delete Speac,al Leave Details Details";
+}
+
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <header class="panel-heading">Are you sure you want to delete @Model.Employee.Name 's details?</header>
+        <div class="panel-body">
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="Id" />
+                <button type="submit" class="btn btn-danger">Delete</button>
+                <a asp-action="Index" asp-route-id="@Model.Id" class="btn btn-default">Back to List</a>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+﻿@model IzinTakip.Entities.Concrete.EmployeeAnnualDetails
+
+@{
+    ViewData["Title"] = "Update EmployeeDetails";
+}
+
+<!-- Basic form -->
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <header class="panel-heading">Update Employee</header>
+        <div class="panel-body">
+            <form role="form" asp-action="Edit" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input asp-for="Id" class="form-control" type="hidden"/>
+                <input asp-for="EmployeesId" class="form-control" type="hidden"/>
+                <input asp-for="AnnualRights" class="form-control" type="hidden"/>
+                <input asp-for="Used" class="form-control" type="hidden"/>
+                <input asp-for="LeftDate" class="form-control" type="hidden"/>
+                <input asp-for="IsOnLeave" class="form-control" type="hidden"/>
+                <input asp-for="CreatedAt" class="form-control" type="hidden"/>
+                
+                <hr />
+                <div class="form-group">
+                    <label asp-for="StartDate" class="control-label"></label>
+                    <input type="Date" asp-for="StartDate" class="form-control" />
+                    <span asp-validation-for="StartDate" class="text-danger"></span>
+
+                    <label asp-for="EndDate" class="control-label"></label>
+                    <input type="Date" asp-for="EndDate" class="form-control" />
+                    <span asp-validation-for="EndDate" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-success" />
+                    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function myFunction() {
+        var checkBox = document.getElementById("myCheck");
+        var IsOnLive = document.getElementById("IsOnLive");
+        if (checkBox.checked == true) {
+            IsOnLive.style.display = "block";
+        } else {
+            IsOnLive.style.display = "none";
+        }
+    }
+</script>

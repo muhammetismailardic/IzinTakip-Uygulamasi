@@ -1,0 +1,79 @@
+﻿@model ICollection<IzinTakip.Entities.Concrete.EmployeeSpecialLeave>;
+
+@{
+    ViewData["Title"] = "Employee Special Leave Index Page";
+    Layout = "_Layout";
+}
+
+<!-- Responsive table -->
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <table id="index-table" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        @*<th data-hide="phone,tablet">Image</th>*@
+                        <th data-toggle="true">Reason</th>
+                        <th data-toggle="true">Count</th>
+                        <th data-hide="phone">Start</th>
+                        <th data-hide="phone">End</th>
+                        <th data-hide="phone">Status</th>
+                        <th data-hide="phone">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            @*<td>
+                                    <img src="~/images/employee/@item.Image" class="img-fluid img-thumbnail" alt="Sheep" height="150" width="150" asp-append-version="true">
+                                </td>*@
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Text)
+                            </td>
+                            <td>
+                                @item.Count days
+                            </td>
+                            <td>
+                                @item.StartDate.ToShortDateString()
+                            </td>
+                            <td>
+                                @item.EndDate.ToShortDateString()
+                            </td>
+
+                            @{
+                                if (item.IsOnLeave == true)
+                                {
+                                    if (item.StartDate <= DateTime.Now && item.EndDate >= DateTime.Now)
+                                    {
+                                        <td data-value="3"><span class="label label-danger">On Leave</span></td>
+                                    }
+                                }
+                                else
+                                {
+                                    if (item.StartDate >= DateTime.Now)
+                                    {
+                                        <td data-value="4"><span class="label label-info">Reserved</span></td>
+                                    }
+                                    else if (item.EndDate <= DateTime.Now)
+                                    {
+                                        <td data-value="4"><span class="label label-success">Completed</span></td>
+                                    }
+                                }
+
+                            }
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success">Edit</a>
+                                    @*<a asp-action="Details" asp-route-id="@item.Id" class="btn btn-default">Details</a>*@
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- /Responsive table -->

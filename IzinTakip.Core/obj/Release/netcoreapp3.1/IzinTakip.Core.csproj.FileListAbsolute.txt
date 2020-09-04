@@ -1,0 +1,9 @@
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Core\bin\Release\netcoreapp3.1\IzinTakip.Core.deps.json
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Core\bin\Release\netcoreapp3.1\IzinTakip.Core.dll
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Core\bin\Release\netcoreapp3.1\IzinTakip.Core.pdb
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Core\obj\Release\netcoreapp3.1\IzinTakip.Core.csprojAssemblyReference.cache
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Core\obj\Release\netcoreapp3.1\IzinTakip.Core.AssemblyInfoInputs.cache
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Core\obj\Release\netcoreapp3.1\IzinTakip.Core.AssemblyInfo.cs
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Core\obj\Release\netcoreapp3.1\IzinTakip.Core.csproj.CoreCompileInputs.cache
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Core\obj\Release\netcoreapp3.1\IzinTakip.Core.dll
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Core\obj\Release\netcoreapp3.1\IzinTakip.Core.pdb

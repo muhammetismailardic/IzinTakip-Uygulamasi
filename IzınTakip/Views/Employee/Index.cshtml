@@ -1,0 +1,93 @@
+﻿@model ICollection<IzinTakip.Entities.Concrete.Employee>;
+
+@{
+    ViewData["Title"] = "Employee Index Page";
+    Layout = "_Layout";
+}
+
+<!-- Responsive table -->
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <table id="index-table" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        @*<th data-hide="phone,tablet">Image</th>*@
+                        <th data-toggle="true">Name</th>
+                        <th data-toggle="true">Surname</th>
+                        <th data-hide="phone,tablet">Recruitment</th>
+                        <th data-hide="phone,tablet">Yearly Right</th>
+                        <th data-hide="phone,tablet">Right Total</th>
+                        <th data-hide="phone,tablet">Available Total</th>
+                        <th data-hide="phone,tablet">Used Total</th>
+                        <th data-hide="phone,tablet">Special Total</th>
+                        <th data-hide="phone,tablet">Status</th>
+                        <th data-hide="phone">Employee Leave</th>
+                        <th data-hide="phone">Special Leave</th>
+                        <th data-hide="phone">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            @*<td>
+                                    <img src="~/images/employee/@item.Image" class="img-fluid img-thumbnail" alt="Sheep" height="150" width="150" asp-append-version="true">
+                                </td>*@
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Surname)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RecruitmentDate.Year)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.YearlyAnnualRightCount)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TotalAnnualRight)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AvailableTotalLeaves)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UsedTotalLeaves)
+                            </td>
+                            <td>
+                                @item.EmployeeSpecialLeaves.Sum(x => x.Count).ToString()
+                            </td>
+                            @{
+                                if (item.IsOnLeave == true)
+                                {
+                                    <td data-value="3"><span class="label label-danger">On Leave</span></td>
+                                }
+                                else
+                                {
+                                    <td data-value="4"><span class="label label-success">Active</span></td>
+                                }
+                            }
+                            <td>
+                                <a asp-controller="EmployeeDetails" asp-action="AddLeave" asp-route-empId="@item.Id">Add</a> |
+                                <a asp-controller="EmployeeDetails" asp-action="Index" asp-route-empId="@item.Id">View</a> |
+                            </td>
+                            <td>
+                                <a asp-controller="SpecialLeave" asp-action="Create" asp-route-empId="@item.Id">Create</a> |
+                                <a asp-controller="SpecialLeave" asp-action="Index" asp-route-empId="@item.Id">View</a> |
+                            </td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success">Edit</a>
+                                    @*<a asp-action="Details" asp-route-id="@item.Id" class="btn btn-default">Details</a>*@
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- /Responsive table -->

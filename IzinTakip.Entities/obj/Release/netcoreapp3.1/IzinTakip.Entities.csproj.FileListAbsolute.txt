@@ -1,0 +1,12 @@
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Entities\bin\Release\netcoreapp3.1\IzinTakip.Entities.deps.json
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Entities\bin\Release\netcoreapp3.1\IzinTakip.Entities.dll
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Entities\bin\Release\netcoreapp3.1\IzinTakip.Entities.pdb
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Entities\bin\Release\netcoreapp3.1\IzinTakip.Core.dll
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Entities\bin\Release\netcoreapp3.1\IzinTakip.Core.pdb
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Entities\obj\Release\netcoreapp3.1\IzinTakip.Entities.csprojAssemblyReference.cache
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Entities\obj\Release\netcoreapp3.1\IzinTakip.Entities.AssemblyInfoInputs.cache
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Entities\obj\Release\netcoreapp3.1\IzinTakip.Entities.AssemblyInfo.cs
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Entities\obj\Release\netcoreapp3.1\IzinTakip.Entities.csproj.CoreCompileInputs.cache
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Entities\obj\Release\netcoreapp3.1\IzinTakip.Entities.csproj.CopyComplete
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Entities\obj\Release\netcoreapp3.1\IzinTakip.Entities.dll
+C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Entities\obj\Release\netcoreapp3.1\IzinTakip.Entities.pdb
