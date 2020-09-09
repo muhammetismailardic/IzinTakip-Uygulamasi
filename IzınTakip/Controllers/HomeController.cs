@@ -10,6 +10,7 @@ namespace IzinTakip.UI.Controllers
     {
         public IActionResult Index()
         {
+            //Testing
             return View();
         }
     }
