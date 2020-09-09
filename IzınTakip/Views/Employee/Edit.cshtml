@@ -11,7 +11,7 @@
         <div class="panel-body">
             <form role="form" asp-action="Edit" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input asp-for="Id" class="form-control" type="hidden"/>
+                <input asp-for="Id" class="form-control" type="hidden" />
                 <div class="form-group">
                     <label asp-for="Name" class="control-label"></label>
                     <input asp-for="Name" class="form-control" />
@@ -50,9 +50,9 @@
                 </div>
 
                 @*<div class="form-group">
-            <label asp-for="ProfileImage">Choose file</label>
-            <input asp-for="ProfileImage">
-        </div>*@
+                    <label asp-for="ProfileImage">Choose file</label>
+                    <input asp-for="ProfileImage">
+                    </div>*@
 
                 <div class="form-group">
                     <input type="submit" value="Update" class="btn btn-success" />

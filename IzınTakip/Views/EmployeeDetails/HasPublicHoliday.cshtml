@@ -1,0 +1,51 @@
+﻿@model IzinTakip.UI.AnnualLeaveViewModel
+
+@{
+    ViewData["Title"] = "Has public holiday!";
+}
+
+<!-- Basic form -->
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <header class="panel-heading">Following dates conflict with Public Holidays?</header>
+        <div class="panel-body">
+            <form asp-action="AddLeaveWithPublicHoliday">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <hr />
+                <div class="form-group" for="disabledInput">
+                    <label asp-for="EmployeeAnnualDetails.StartDate" class="control-label"></label>
+                    <input type="Date" asp-for="EmployeeAnnualDetails.StartDate" class="form-control" />
+                    <span asp-validation-for="EmployeeAnnualDetails.StartDate" class="text-danger"></span>
+
+                    <label asp-for="EmployeeAnnualDetails.EndDate" class="control-label"></label>
+                    <input type="Date" asp-for="EmployeeAnnualDetails.EndDate" class="form-control" />
+                    <span asp-validation-for="EmployeeAnnualDetails.EndDate" class="text-danger"></span>
+                </div>
+                <hr />
+                <h4>Following public holidays will not be encounterd as annual leave !</h4>
+                <div class="form-group">
+                    @{
+                        @for (int i = 0; i < Model.PublicHolidays.Count; i++)
+                        {
+                            <div class="form-check">
+                                @Html.CheckBoxFor(x => Model.PublicHolidays[i].IsChecked)
+                                <label class="form-check-label">@Model.PublicHolidays[i].summary - @Model.PublicHolidays[i].start.date</label>
+                            </div>
+                        }
+                    }
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="AddLeave" class="btn btn-success" />
+                    <a asp-controller="Employee" asp-action="Index" class="btn btn-primary">Back to List</a>
+                </div>
+                <input asp-for="EmployeeAnnualDetails.EmployeesId" class="form-control" type="hidden" />
+                <input asp-for="CurrentUsedDate" class="form-control" type="hidden" />
+                <input asp-for="EmployeeAnnualDetails.LeftDate" class="form-control" type="hidden" />
+                <input asp-for="EmployeeAnnualDetails.Used" class="form-control" type="hidden" />
+                <input asp-for="EmployeeAnnualDetails.AnnualRights" class="form-control" type="hidden" />
+                <input asp-for="EmployeeAnnualDetails.CreatedAt" class="form-control" type="hidden" />
+                <input asp-for="EmployeeAnnualDetails.UpdatedAt" class="form-control" type="hidden" />
+            </form>
+        </div>
+    </div>
+</div>

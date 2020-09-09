@@ -65,12 +65,11 @@ namespace IzinTakip.UI.Controllers
             {
                 var employeeDetails = await _employeeService.FindEmployeeByIdAsync(empId);
                 var allDataByEmp = await _employeeAnnualDetailsService.GetAllEmployeeAnnualDetailsByIdAsync(empId);
-
                 int currentUsedDate = calworkingDays.HolidaysAsync(employeeAnnualRights.StartDate, employeeAnnualRights.EndDate);
 
                 employeeAnnualRights.EmployeesId = empId;
                 employeeAnnualRights.AnnualRights = employeeDetails.YearlyAnnualRightCount;
-                employeeAnnualRights.Used = currentUsedDate;
+
 
                 employeeAnnualRights.StartDate = employeeAnnualRights.StartDate;
                 employeeAnnualRights.EndDate = employeeAnnualRights.EndDate.AddHours(23).AddMinutes(59);
@@ -78,14 +77,54 @@ namespace IzinTakip.UI.Controllers
                 employeeAnnualRights.CreatedAt = DateTime.Now;
                 employeeAnnualRights.UpdatedAt = DateTime.Now;
 
-                employeeAnnualRights.LeftDate = employeeDetails.TotalAnnualRight - allDataByEmp.Sum(usedDate => usedDate.Used) - currentUsedDate;
-                //employeeAnnualRights.LeftDate = employeeDetails.AvailableTotalLeaves - currentUsedDate;
+                employeeAnnualRights.LeftDate = employeeDetails.TotalAnnualRight - allDataByEmp.Sum(usedDate => usedDate.Used);
+
+                if (calworkingDays.PublicHolidayDates.Count != 0)
+                {
+                    var test = new AnnualLeaveViewModel()
+                    {
+                        CurrentUsedDate = currentUsedDate,
+                        PublicHolidays = calworkingDays.PublicHolidayDates,
+                        EmployeeAnnualDetails = employeeAnnualRights,
+                    };
+                    await _employeeAnnualDetailsService.CreateAsync(employeeAnnualRights);
+
+                    return View("HasPublicHoliday",test);
+                }
+                else
+                {
+                    employeeAnnualRights.LeftDate -= currentUsedDate;
+                    employeeAnnualRights.Used = currentUsedDate;
+                }
 
                 await _employeeAnnualDetailsService.CreateAsync(employeeAnnualRights);
                 return RedirectToAction(nameof(Index), new { empId = empId });
             }
 
             return View(employeeAnnualRights);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddLeaveWithPublicHoliday(AnnualLeaveViewModel annualLeaveViewModel, int leftDate, int Used)
+        {
+            if (ModelState.IsValid)
+            {
+                int counter = 0;
+                foreach (var item in annualLeaveViewModel.PublicHolidays)
+                {
+                    if (item.IsChecked == true)
+                    {
+                        counter++;
+                    }
+                }
+                int totalUsedDate = annualLeaveViewModel.CurrentUsedDate - counter;
+
+                annualLeaveViewModel.EmployeeAnnualDetails.Used = totalUsedDate;
+                annualLeaveViewModel.EmployeeAnnualDetails.LeftDate -= totalUsedDate;
+            }
+
+            await _employeeAnnualDetailsService.UpdateAsync(annualLeaveViewModel.EmployeeAnnualDetails);
+            return RedirectToAction(nameof(Index), new { empId = annualLeaveViewModel.EmployeeAnnualDetails.EmployeesId });
         }
 
         [HttpGet]

@@ -12,7 +12,7 @@ namespace IzinTakip.UI.Shared
 {
     public class WorkingDays
     {
-        List<DateTime> PublicHolidayDates = new List<DateTime>();//Resmi tatilleri ekleyeceğimiz listemizi oluşturuyoruz.
+        public List<HolidayCostum> PublicHolidayDates = new List<HolidayCostum>();//Resmi tatilleri ekleyeceğimiz listemizi oluşturuyoruz.
         List<HolidayCostum> PublicHolidays = new List<HolidayCostum>();
 
         int publicHoliday = 0;
@@ -28,11 +28,11 @@ namespace IzinTakip.UI.Shared
 
                 if (dif.Days == 0)
                 {
-                    PublicHolidayDates.Add(startDate);
+                    PublicHolidayDates.Add(holidays);
                 }
                 else if (dif.Days == 1)
                 {
-                    PublicHolidayDates.Add(startDate);
+                    PublicHolidayDates.Add(holidays);
                 }
 
                 else
@@ -40,27 +40,38 @@ namespace IzinTakip.UI.Shared
                     DateTime temp = startDate;
                     for (int i = 0; i < dif.Days; i++)
                     {
-                        PublicHolidayDates.Add(temp);
+                        var currentHolidays = new HolidayCostum
+                        {
+                            start = new Start { date = temp.ToString("yyyy-MM-dd") },
+                            end = new End { date = temp.ToString("yyyy-MM-dd") },
+                            summary = holidays.summary
+                        };
+                        PublicHolidayDates.Add(currentHolidays);
                         temp = temp.AddDays(1);
                     }
                 }
             }
 
+            var tempPublicHolidays = new List<HolidayCostum>();
             foreach (var item in PublicHolidayDates)
             {
                 //resmi tatiller hafta sonuna denk geliyorsa aşagıdaki metod ile hafta sonralını çıkarttığımızdan tekrar saymasına gerek yok
                 //hafta içine denk gelen resmi tatilleri sayıyoruz.
-                if ((Convert.ToDateTime(item).ToString("dddd") != "Pazar") && (Convert.ToDateTime(item) >= sDate && Convert.ToDateTime(item) <= eDate))
+                //TODO if time format is different then Turkish it would be issue
+                if ((Convert.ToDateTime(item.start.date).ToString("dddd") != "Pazar") && (Convert.ToDateTime(item.end.date) >= sDate && Convert.ToDateTime(item.start.date) <= eDate))
                 {
+                    //if condition meets the requirenments we add the dates back to list.
+                    tempPublicHolidays.Add(item);
                     publicHoliday++;
                 }
             }
+            PublicHolidayDates = tempPublicHolidays;
+
             // Substract public holidays.
-            int result = CalculateWorkingDays(sDate, eDate) - publicHoliday;
+            int result = CalculateWorkingDays(sDate, eDate);
 
             return result;
         }
-
         private int CalculateWorkingDays(DateTime sDate, DateTime eDate)
         {
             DateTime geciciTarih = sDate;
@@ -188,6 +199,7 @@ namespace IzinTakip.UI.Shared
         public string summary { get; set; }
         public Start start { get; set; }
         public End end { get; set; }
+        public bool IsChecked { get; set; } = true;
     }
     #endregion
 }
