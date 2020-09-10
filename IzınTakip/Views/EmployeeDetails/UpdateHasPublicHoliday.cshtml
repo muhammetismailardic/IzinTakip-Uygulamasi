@@ -1,7 +1,7 @@
 ﻿@model IzinTakip.UI.AnnualLeaveViewModel
 
 @{
-    ViewData["Title"] = "Has public holiday!";
+    ViewData["Title"] = "Update Entry with public holiday!";
 }
 
 <!-- Basic form -->
@@ -9,7 +9,7 @@
     <div class="panel panel-default">
         <header class="panel-heading">Following dates conflict with Public Holidays?</header>
         <div class="panel-body">
-            <form asp-action="AddLeaveWithPublicHoliday">
+            <form asp-action="UpdateWithPublicHoliday">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <hr />
                 <div class="form-group">
@@ -38,6 +38,7 @@
                     <input type="submit" value="AddLeave" class="btn btn-success" />
                     <a asp-controller="Employee" asp-action="Index" class="btn btn-primary">Back to List</a>
                 </div>
+                <input asp-for="EmployeeAnnualDetails.Id" class="form-control" type="hidden" />
                 <input asp-for="EmployeeAnnualDetails.EmployeesId" class="form-control" type="hidden" />
                 <input asp-for="CurrentUsedDate" class="form-control" type="hidden" />
                 <input asp-for="EmployeeAnnualDetails.LeftDate" class="form-control" type="hidden" />

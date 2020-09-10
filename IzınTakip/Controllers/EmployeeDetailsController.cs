@@ -81,15 +81,14 @@ namespace IzinTakip.UI.Controllers
 
                 if (calworkingDays.PublicHolidayDates.Count != 0)
                 {
-                    var test = new AnnualLeaveViewModel()
+                    var createEmpDetWithPubHolidays = new AnnualLeaveViewModel()
                     {
                         CurrentUsedDate = currentUsedDate,
                         PublicHolidays = calworkingDays.PublicHolidayDates,
                         EmployeeAnnualDetails = employeeAnnualRights,
                     };
-                    await _employeeAnnualDetailsService.CreateAsync(employeeAnnualRights);
 
-                    return View("HasPublicHoliday",test);
+                    return View("HasPublicHoliday", createEmpDetWithPubHolidays);
                 }
                 else
                 {
@@ -105,7 +104,7 @@ namespace IzinTakip.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddLeaveWithPublicHoliday(AnnualLeaveViewModel annualLeaveViewModel, int leftDate, int Used)
+        public async Task<IActionResult> AddLeaveWithPublicHoliday(AnnualLeaveViewModel annualLeaveViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -123,8 +122,33 @@ namespace IzinTakip.UI.Controllers
                 annualLeaveViewModel.EmployeeAnnualDetails.LeftDate -= totalUsedDate;
             }
 
-            await _employeeAnnualDetailsService.UpdateAsync(annualLeaveViewModel.EmployeeAnnualDetails);
+            await _employeeAnnualDetailsService.CreateAsync(annualLeaveViewModel.EmployeeAnnualDetails);
             return RedirectToAction(nameof(Index), new { empId = annualLeaveViewModel.EmployeeAnnualDetails.EmployeesId });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateWithPublicHoliday(AnnualLeaveViewModel annualLeaveViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                int counter = 0;
+                foreach (var item in annualLeaveViewModel.PublicHolidays)
+                {
+                    if (item.IsChecked == true)
+                    {
+                        counter++;
+                    }
+                }
+                int totalUsedDate = annualLeaveViewModel.CurrentUsedDate - counter;
+
+                annualLeaveViewModel.EmployeeAnnualDetails.Used = totalUsedDate;
+                annualLeaveViewModel.EmployeeAnnualDetails.LeftDate -= totalUsedDate;
+
+                await _employeeAnnualDetailsService.UpdateAsync(annualLeaveViewModel.EmployeeAnnualDetails);
+
+                return RedirectToAction(nameof(Index), new { empId = annualLeaveViewModel.EmployeeAnnualDetails.EmployeesId });
+            }
+            return RedirectToAction(nameof(Edit), new { empId = annualLeaveViewModel.EmployeeAnnualDetails.EmployeesId });
         }
 
         [HttpGet]
@@ -163,8 +187,22 @@ namespace IzinTakip.UI.Controllers
                     employeeDetails.StartDate = employeeDetails.StartDate;
                     employeeDetails.EndDate = employeeDetails.EndDate.AddHours(23).AddMinutes(59);
 
-                    await _employeeAnnualDetailsService.UpdateAsync(employeeDetails);
-                    return RedirectToAction(nameof(Index), new { empId = employeeDetails.EmployeesId });
+                    if (calworkingDays.PublicHolidayDates.Count != 0)
+                    {
+                        var upEmpDetWithPubHolidays = new AnnualLeaveViewModel()
+                        {
+                            CurrentUsedDate = currentUsedDate,
+                            PublicHolidays = calworkingDays.PublicHolidayDates,
+                            EmployeeAnnualDetails = employeeDetails,
+                        };
+
+                        return View("UpdateHasPublicHoliday", upEmpDetWithPubHolidays);
+                    }
+                    else
+                    {
+                        await _employeeAnnualDetailsService.UpdateAsync(employeeDetails);
+                        return RedirectToAction(nameof(Index), new { empId = employeeDetails.EmployeesId });
+                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {

@@ -921,3 +921,4 @@ D:\Yedek\Benim\Projects\IzinTakip\IzınTakip\obj\Debug\netcoreapp3.1\IzinTakip.U
 D:\Yedek\Benim\Projects\IzinTakip\IzınTakip\obj\Debug\netcoreapp3.1\IzinTakip.UI.pdb
 D:\Yedek\Benim\Projects\IzinTakip\IzınTakip\obj\Debug\netcoreapp3.1\IzinTakip.UI.genruntimeconfig.cache
 D:\Yedek\Benim\Projects\IzinTakip\IzınTakip\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeDetails\HasPublicHoliday.cshtml.g.cs
+D:\Yedek\Benim\Projects\IzinTakip\IzınTakip\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeDetails\UpdateHasPublicHoliday.cshtml.g.cs
