@@ -88,7 +88,7 @@ namespace IzinTakip.UI.Controllers
                         EmployeeAnnualDetails = employeeAnnualRights,
                     };
 
-                    return View("HasPublicHoliday", createEmpDetWithPubHolidays);
+                    return View("/Shared/HasPublicHoliday/", createEmpDetWithPubHolidays);
                 }
                 else
                 {

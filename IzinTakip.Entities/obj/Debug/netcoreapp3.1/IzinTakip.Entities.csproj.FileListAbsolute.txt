@@ -22,3 +22,15 @@ D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Entities\obj\Debug\netcoreapp3.1\Izi
 D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Entities\obj\Debug\netcoreapp3.1\IzinTakip.Entities.csproj.CopyComplete
 D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Entities\obj\Debug\netcoreapp3.1\IzinTakip.Entities.dll
 D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Entities\obj\Debug\netcoreapp3.1\IzinTakip.Entities.pdb
+C:\Projects\IzinTakip\IzinTakip.Entities\bin\Debug\netcoreapp3.1\IzinTakip.Entities.deps.json
+C:\Projects\IzinTakip\IzinTakip.Entities\bin\Debug\netcoreapp3.1\IzinTakip.Entities.dll
+C:\Projects\IzinTakip\IzinTakip.Entities\bin\Debug\netcoreapp3.1\IzinTakip.Entities.pdb
+C:\Projects\IzinTakip\IzinTakip.Entities\bin\Debug\netcoreapp3.1\IzinTakip.Core.dll
+C:\Projects\IzinTakip\IzinTakip.Entities\bin\Debug\netcoreapp3.1\IzinTakip.Core.pdb
+C:\Projects\IzinTakip\IzinTakip.Entities\obj\Debug\netcoreapp3.1\IzinTakip.Entities.csprojAssemblyReference.cache
+C:\Projects\IzinTakip\IzinTakip.Entities\obj\Debug\netcoreapp3.1\IzinTakip.Entities.AssemblyInfoInputs.cache
+C:\Projects\IzinTakip\IzinTakip.Entities\obj\Debug\netcoreapp3.1\IzinTakip.Entities.AssemblyInfo.cs
+C:\Projects\IzinTakip\IzinTakip.Entities\obj\Debug\netcoreapp3.1\IzinTakip.Entities.csproj.CoreCompileInputs.cache
+C:\Projects\IzinTakip\IzinTakip.Entities\obj\Debug\netcoreapp3.1\IzinTakip.Entities.csproj.CopyComplete
+C:\Projects\IzinTakip\IzinTakip.Entities\obj\Debug\netcoreapp3.1\IzinTakip.Entities.dll
+C:\Projects\IzinTakip\IzinTakip.Entities\obj\Debug\netcoreapp3.1\IzinTakip.Entities.pdb

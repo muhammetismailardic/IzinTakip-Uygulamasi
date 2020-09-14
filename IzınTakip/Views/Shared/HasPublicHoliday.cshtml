@@ -1,0 +1,84 @@
+﻿@model IzinTakip.UI.AnnualLeaveViewModel
+
+@{
+    ViewData["Title"] = "Has public holiday!";
+}
+
+<!-- Basic form -->
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <header class="panel-heading">Following dates conflict with Public Holidays?</header>
+        <div class="panel-body">
+            <form asp-action="AddLeaveWithPublicHoliday">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <hr />
+                @{
+                    DateTime start = new DateTime();
+                    DateTime end = new DateTime();
+
+                    if (Model.EmployeeAnnualDetails != null && Model.EmployeeSpecialLeaves == null)
+                    {
+                        start = Model.EmployeeAnnualDetails.StartDate;
+                        end = Model.EmployeeAnnualDetails.EndDate;
+                    }
+
+                    else if (Model.EmployeeAnnualDetails == null && Model.EmployeeSpecialLeaves != null)
+                    {
+                        start = Model.EmployeeSpecialLeaves.StartDate;
+                        end = Model.EmployeeSpecialLeaves.EndDate;
+                    }
+                }
+
+                <div class="form-group">
+                    <label class="control-label">Start Date</label>
+                    <input type="Date" value="@start" asp-format="{0:dd/MM/yyyy}" class="form-control" disabled />
+
+                    <label class="control-label">End Date</label>
+                    <input type="Date" value="@end.ToString()" class="form-control" disabled />
+                </div>
+
+                <hr />
+                <h4>Following public holidays will not be encounterd as annual leave !</h4>
+                <div class="form-group">
+                    @{
+                        @for (int i = 0; i < Model.PublicHolidays.Count; i++)
+                        {
+                            <div class="form-check">
+                                @Html.CheckBoxFor(x => Model.PublicHolidays[i].IsChecked)
+                                <label class="form-check-label">@Model.PublicHolidays[i].summary - @Model.PublicHolidays[i].start.date</label>
+                            </div>
+                        }
+                    }
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="AddLeave" class="btn btn-success" />
+                    <a asp-controller="Employee" asp-action="Index" class="btn btn-primary">Back to List</a>
+                </div>
+
+                @* Items for Employee Annual Details. *@
+                <input asp-for="EmployeeAnnualDetails.EmployeesId" class="form-control" type="hidden" />
+                <input asp-for="CurrentUsedDate" class="form-control" type="hidden" />
+                <input asp-for="EmployeeAnnualDetails.LeftDate" class="form-control" type="hidden" />
+                <input asp-for="EmployeeAnnualDetails.Used" class="form-control" type="hidden" />
+                <input asp-for="EmployeeAnnualDetails.AnnualRights" class="form-control" type="hidden" />
+                <input asp-for="EmployeeAnnualDetails.CreatedAt" class="form-control" type="hidden" />
+                <input asp-for="EmployeeAnnualDetails.UpdatedAt" class="form-control" type="hidden" />
+                <input asp-for="EmployeeAnnualDetails.StartDate" class="form-control" type="hidden" />
+                <input asp-for="EmployeeAnnualDetails.EndDate" class="form-control" type="hidden" />
+
+
+                @* Items for Special Leave. *@
+                <input asp-for="EmployeeSpecialLeaves.Id" class="form-control" type="hidden" />
+                <input asp-for="EmployeeSpecialLeaves.EmployeeId" class="form-control" type="hidden" />
+                <input asp-for="EmployeeSpecialLeaves.Count" class="form-control" type="hidden" />
+                <input asp-for="EmployeeSpecialLeaves.CreatedAt" class="form-control" type="hidden" />
+                <input asp-for="EmployeeSpecialLeaves.UpdatedAt" class="form-control" type="hidden" />
+                <input asp-for="EmployeeSpecialLeaves.IsOnLeave" class="form-control" type="hidden" />
+                <input asp-for="EmployeeSpecialLeaves.StartDate" class="form-control" type="hidden" />
+                <input asp-for="EmployeeSpecialLeaves.EndDate" class="form-control" type="hidden" />
+                <input asp-for="EmployeeSpecialLeaves.Text" class="form-control" type="hidden" />
+
+            </form>
+        </div>
+    </div>
+</div>

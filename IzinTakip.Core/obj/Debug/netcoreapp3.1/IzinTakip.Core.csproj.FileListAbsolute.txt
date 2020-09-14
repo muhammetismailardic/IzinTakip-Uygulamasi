@@ -16,3 +16,12 @@ D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Core\obj\Debug\netcoreapp3.1\IzinTak
 D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Core\obj\Debug\netcoreapp3.1\IzinTakip.Core.csproj.CoreCompileInputs.cache
 D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Core\obj\Debug\netcoreapp3.1\IzinTakip.Core.dll
 D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Core\obj\Debug\netcoreapp3.1\IzinTakip.Core.pdb
+C:\Projects\IzinTakip\IzinTakip.Core\bin\Debug\netcoreapp3.1\IzinTakip.Core.deps.json
+C:\Projects\IzinTakip\IzinTakip.Core\bin\Debug\netcoreapp3.1\IzinTakip.Core.dll
+C:\Projects\IzinTakip\IzinTakip.Core\bin\Debug\netcoreapp3.1\IzinTakip.Core.pdb
+C:\Projects\IzinTakip\IzinTakip.Core\obj\Debug\netcoreapp3.1\IzinTakip.Core.csprojAssemblyReference.cache
+C:\Projects\IzinTakip\IzinTakip.Core\obj\Debug\netcoreapp3.1\IzinTakip.Core.AssemblyInfoInputs.cache
+C:\Projects\IzinTakip\IzinTakip.Core\obj\Debug\netcoreapp3.1\IzinTakip.Core.AssemblyInfo.cs
+C:\Projects\IzinTakip\IzinTakip.Core\obj\Debug\netcoreapp3.1\IzinTakip.Core.csproj.CoreCompileInputs.cache
+C:\Projects\IzinTakip\IzinTakip.Core\obj\Debug\netcoreapp3.1\IzinTakip.Core.dll
+C:\Projects\IzinTakip\IzinTakip.Core\obj\Debug\netcoreapp3.1\IzinTakip.Core.pdb

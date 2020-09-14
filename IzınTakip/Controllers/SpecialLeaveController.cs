@@ -54,13 +54,52 @@ namespace IzinTakip.UI.Controllers
 
                 employeeSpecialLeave.StartDate = employeeSpecialLeave.StartDate;
                 employeeSpecialLeave.EndDate = employeeSpecialLeave.EndDate.AddHours(23).AddMinutes(59);
-                employeeSpecialLeave.Count = currentUsedDate;
                 employeeSpecialLeave.CreatedAt = DateTime.Now;
                 employeeSpecialLeave.UpdatedAt = DateTime.Now;
+
+                if (calworkingDays.PublicHolidayDates.Count != 0)
+                {
+                    var createEmpSpecialLeaveWithPubHolidays = new AnnualLeaveViewModel()
+                    {
+                        CurrentUsedDate = currentUsedDate,
+                        PublicHolidays = calworkingDays.PublicHolidayDates,
+                        EmployeeSpecialLeaves = employeeSpecialLeave,
+                    };
+
+                    return View("~/Views/Shared/HasPublicHoliday.cshtml", createEmpSpecialLeaveWithPubHolidays);
+                }
+                else
+                {
+                    employeeSpecialLeave.Count = currentUsedDate;
+                }
+
                 await _employeeSpecialLeave.CreateAsync(employeeSpecialLeave);
                 return RedirectToAction("Index", "SpecialLeave", new { empId = employeeSpecialLeave.EmployeeId });
             }
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateWithPublicHolidays(AnnualLeaveViewModel annualLeaveViewModel)
+        {
+
+            if (ModelState.IsValid)
+            {
+                int counter = 0;
+                foreach (var item in annualLeaveViewModel.PublicHolidays)
+                {
+                    if (item.IsChecked == true)
+                    {
+                        counter++;
+                    }
+                }
+                annualLeaveViewModel.EmployeeSpecialLeaves.Count = annualLeaveViewModel.CurrentUsedDate - counter;
+                
+                await _employeeSpecialLeave.CreateAsync(annualLeaveViewModel.EmployeeSpecialLeaves);
+                return RedirectToAction("Index", "SpecialLeave", new { empId = annualLeaveViewModel.EmployeeSpecialLeaves.EmployeeId });
+            }
+
+            return RedirectToAction("Index", "SpecialLeave", new { empId = annualLeaveViewModel.EmployeeSpecialLeaves.EmployeeId });
         }
 
         [HttpGet]
