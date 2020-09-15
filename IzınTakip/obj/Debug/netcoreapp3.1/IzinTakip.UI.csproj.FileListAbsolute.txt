@@ -1385,7 +1385,7 @@ C:\Projects\IzinTakip\IzınTakip\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeDet
 C:\Projects\IzinTakip\IzınTakip\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeDetails\-UpdateHasPublicHoliday.cshtml.g.cs
 C:\Projects\IzinTakip\IzınTakip\obj\Debug\netcoreapp3.1\Razor\Views\Shared\HasPublicHoliday.cshtml.g.cs
 C:\Projects\IzinTakip\IzınTakip\obj\Debug\netcoreapp3.1\Razor\Views\Shared\UpdateHasPublicHoliday.cshtml.g.cs
-D:\Yedek\Benim\Projects\IzinTakip\IzınTakip\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeDetails\-HasPublicHoliday.cshtml.g.cs
-D:\Yedek\Benim\Projects\IzinTakip\IzınTakip\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeDetails\-UpdateHasPublicHoliday.cshtml.g.cs
-D:\Yedek\Benim\Projects\IzinTakip\IzınTakip\obj\Debug\netcoreapp3.1\Razor\Views\Shared\HasPublicHoliday.cshtml.g.cs
-D:\Yedek\Benim\Projects\IzinTakip\IzınTakip\obj\Debug\netcoreapp3.1\Razor\Views\Shared\UpdateHasPublicHoliday.cshtml.g.cs
+D:\Yedek\Benim\Projects\IzinTakip\IzınTakip\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeDetails\HasPublicHoliday.cshtml.g.cs
+D:\Yedek\Benim\Projects\IzinTakip\IzınTakip\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeDetails\UpdateHasPublicHoliday.cshtml.g.cs
+D:\Yedek\Benim\Projects\IzinTakip\IzınTakip\obj\Debug\netcoreapp3.1\Razor\Views\SpecialLeave\HasPublicHoliday.cshtml.g.cs
+D:\Yedek\Benim\Projects\IzinTakip\IzınTakip\obj\Debug\netcoreapp3.1\Razor\Views\SpecialLeave\UpdateHasPublicHoliday.cshtml.g.cs

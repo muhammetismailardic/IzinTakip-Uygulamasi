@@ -66,7 +66,7 @@ namespace IzinTakip.UI.Controllers
                         EmployeeSpecialLeaves = employeeSpecialLeave,
                     };
 
-                    return View("~/Views/Shared/HasPublicHoliday.cshtml", createEmpSpecialLeaveWithPubHolidays);
+                    return View("HasPublicHoliday", createEmpSpecialLeaveWithPubHolidays);
                 }
                 else
                 {
@@ -82,7 +82,6 @@ namespace IzinTakip.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateWithPublicHolidays(AnnualLeaveViewModel annualLeaveViewModel)
         {
-
             if (ModelState.IsValid)
             {
                 int counter = 0;
@@ -94,8 +93,8 @@ namespace IzinTakip.UI.Controllers
                     }
                 }
                 annualLeaveViewModel.EmployeeSpecialLeaves.Count = annualLeaveViewModel.CurrentUsedDate - counter;
-                
                 await _employeeSpecialLeave.CreateAsync(annualLeaveViewModel.EmployeeSpecialLeaves);
+
                 return RedirectToAction("Index", "SpecialLeave", new { empId = annualLeaveViewModel.EmployeeSpecialLeaves.EmployeeId });
             }
 
@@ -132,6 +131,22 @@ namespace IzinTakip.UI.Controllers
                     employeeSpecialLeave.Count = currentUsedDate;
                     employeeSpecialLeave.UpdatedAt = DateTime.Now;
 
+                    if (calworkingDays.PublicHolidayDates.Count != 0)
+                    {
+                        var createEmpSpecialLeaveWithPubHolidays = new AnnualLeaveViewModel()
+                        {
+                            CurrentUsedDate = currentUsedDate,
+                            PublicHolidays = calworkingDays.PublicHolidayDates,
+                            EmployeeSpecialLeaves = employeeSpecialLeave,
+                        };
+
+                        return View("UpdateHasPublicHoliday", createEmpSpecialLeaveWithPubHolidays);
+                    }
+                    else
+                    {
+                        employeeSpecialLeave.Count = currentUsedDate;
+                    }
+
                     await _employeeSpecialLeave.UpdateAsync(employeeSpecialLeave);
                     return RedirectToAction("Index", "SpecialLeave", new { empId = employeeSpecialLeave.EmployeeId });
                 }
@@ -142,6 +157,28 @@ namespace IzinTakip.UI.Controllers
             }
 
             return View(employeeSpecialLeave);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateWithPublicHoliday(AnnualLeaveViewModel annualLeaveViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                int counter = 0;
+                foreach (var item in annualLeaveViewModel.PublicHolidays)
+                {
+                    if (item.IsChecked == true)
+                    {
+                        counter++;
+                    }
+                }
+                annualLeaveViewModel.EmployeeSpecialLeaves.Count = annualLeaveViewModel.CurrentUsedDate - counter;
+                await _employeeSpecialLeave.UpdateAsync(annualLeaveViewModel.EmployeeSpecialLeaves);
+
+                return RedirectToAction("Index", "SpecialLeave", new { empId = annualLeaveViewModel.EmployeeSpecialLeaves.EmployeeId });
+            }
+
+            return RedirectToAction("Edit", "SpecialLeave", new { empId = annualLeaveViewModel.EmployeeSpecialLeaves.EmployeeId });
         }
 
         public async Task<IActionResult> Delete(int? id)

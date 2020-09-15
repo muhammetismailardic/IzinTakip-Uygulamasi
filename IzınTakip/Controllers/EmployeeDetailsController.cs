@@ -87,8 +87,7 @@ namespace IzinTakip.UI.Controllers
                         PublicHolidays = calworkingDays.PublicHolidayDates,
                         EmployeeAnnualDetails = employeeAnnualRights,
                     };
-
-                    return View("/Shared/HasPublicHoliday/", createEmpDetWithPubHolidays);
+                    return View("HasPublicHoliday", createEmpDetWithPubHolidays);
                 }
                 else
                 {
@@ -179,7 +178,6 @@ namespace IzinTakip.UI.Controllers
                 try
                 {
                     int currentUsedDate = calworkingDays.HolidaysAsync(employeeDetails.StartDate, employeeDetails.EndDate);
-
                     employeeDetails.LeftDate -= (currentUsedDate - employeeDetails.Used);
                     employeeDetails.Used = currentUsedDate;
                     employeeDetails.UpdatedAt = DateTime.Now;
@@ -195,7 +193,6 @@ namespace IzinTakip.UI.Controllers
                             PublicHolidays = calworkingDays.PublicHolidayDates,
                             EmployeeAnnualDetails = employeeDetails,
                         };
-
                         return View("UpdateHasPublicHoliday", upEmpDetWithPubHolidays);
                     }
                     else

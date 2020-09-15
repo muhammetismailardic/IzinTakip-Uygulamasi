@@ -18,59 +18,62 @@ namespace IzinTakip.UI.Shared
         int publicHoliday = 0;
         public int HolidaysAsync(DateTime sDate, DateTime eDate)
         {
-            PublicHolidays = PublicHoliday();
-
-            foreach (var holidays in PublicHolidays)//Resmi tatil listemizi foreach ile geziyoruz
+            if (PublicHoliday() != null)
             {
-                var startDate = Convert.ToDateTime(holidays.start.date);
-                var endDate = Convert.ToDateTime(holidays.end.date);
-                TimeSpan dif = endDate.Subtract(startDate);
+                PublicHolidays = PublicHoliday();
+                foreach (var holidays in PublicHolidays)//Resmi tatil listemizi foreach ile geziyoruz
+                {
+                    var startDate = Convert.ToDateTime(holidays.start.date);
+                    var endDate = Convert.ToDateTime(holidays.end.date);
+                    TimeSpan dif = endDate.Subtract(startDate);
 
-                if (dif.Days == 0)
-                {
-                    PublicHolidayDates.Add(holidays);
-                }
-                else if (dif.Days == 1)
-                {
-                    PublicHolidayDates.Add(holidays);
-                }
-
-                else
-                {
-                    DateTime temp = startDate;
-                    for (int i = 0; i < dif.Days; i++)
+                    if (dif.Days == 0)
                     {
-                        var currentHolidays = new HolidayCostum
+                        PublicHolidayDates.Add(holidays);
+                    }
+                    else if (dif.Days == 1)
+                    {
+                        PublicHolidayDates.Add(holidays);
+                    }
+
+                    else
+                    {
+                        DateTime temp = startDate;
+                        for (int i = 0; i < dif.Days; i++)
                         {
-                            start = new Start { date = temp.ToString("yyyy-MM-dd") },
-                            end = new End { date = temp.ToString("yyyy-MM-dd") },
-                            summary = holidays.summary
-                        };
-                        PublicHolidayDates.Add(currentHolidays);
-                        temp = temp.AddDays(1);
+                            var currentHolidays = new HolidayCostum
+                            {
+                                start = new Start { date = temp.ToString("yyyy-MM-dd") },
+                                end = new End { date = temp.ToString("yyyy-MM-dd") },
+                                summary = holidays.summary
+                            };
+                            PublicHolidayDates.Add(currentHolidays);
+                            temp = temp.AddDays(1);
+                        }
                     }
                 }
-            }
 
-            var tempPublicHolidays = new List<HolidayCostum>();
-            foreach (var item in PublicHolidayDates)
-            {
-                //resmi tatiller hafta sonuna denk geliyorsa aşagıdaki metod ile hafta sonralını çıkarttığımızdan tekrar saymasına gerek yok
-                //hafta içine denk gelen resmi tatilleri sayıyoruz.
-                //TODO if time format is different then Turkish it would be issue
-                if ((Convert.ToDateTime(item.start.date).ToString("dddd") != "Pazar") && (Convert.ToDateTime(item.end.date) >= sDate && Convert.ToDateTime(item.start.date) <= eDate))
+                var tempPublicHolidays = new List<HolidayCostum>();
+                foreach (var item in PublicHolidayDates)
                 {
-                    //if condition meets the requirenments we add the dates back to list.
-                    tempPublicHolidays.Add(item);
-                    publicHoliday++;
+                    //resmi tatiller hafta sonuna denk geliyorsa aşagıdaki metod ile hafta sonralını çıkarttığımızdan tekrar saymasına gerek yok
+                    //hafta içine denk gelen resmi tatilleri sayıyoruz.
+                    //TODO if time format is different then Turkish it would be issue
+                    if ((Convert.ToDateTime(item.start.date).ToString("dddd") != "Pazar") && (Convert.ToDateTime(item.end.date) >= sDate && Convert.ToDateTime(item.start.date) <= eDate))
+                    {
+                        //if condition meets the requirenments we add the dates back to list.
+                        tempPublicHolidays.Add(item);
+                        publicHoliday++;
+                    }
                 }
+                PublicHolidayDates = tempPublicHolidays;
+
+                // Substract public holidays.
+                int result = CalculateWorkingDays(sDate, eDate);
+
+                return result;
             }
-            PublicHolidayDates = tempPublicHolidays;
-
-            // Substract public holidays.
-            int result = CalculateWorkingDays(sDate, eDate);
-
-            return result;
+            return 0;
         }
         private int CalculateWorkingDays(DateTime sDate, DateTime eDate)
         {
@@ -92,46 +95,51 @@ namespace IzinTakip.UI.Shared
         {
             string jsonResult = new WebClient().
                        DownloadString("https://www.googleapis.com/calendar/v3/calendars/turkish__tr%40holiday.calendar.google.com/events?key=AIzaSyAJcACw9-p9cgKbLkf7GlNpVhJdd7w9FCA");
-            var holiday = JsonConvert.DeserializeObject<Holiday>(jsonResult);
+            
+            if (!String.IsNullOrEmpty(jsonResult))
+            {
+                var holiday = JsonConvert.DeserializeObject<Holiday>(jsonResult);
 
-            // Gets the current year public holidays
-            holiday.items = holiday.items.Where(x => (x.start.date.ToString().Split("-"))[0] == DateTime.Now.Year.ToString()).Aggregate(new List<Item>(), (x, y) =>
-            {
-                Item item = y;
-                int ii = item.summary.ToLower().IndexOf("day");
-                if (ii > 0)
-                    item.summary = item.summary.Substring(0, ii);
-                else
-                    item.summary = item.summary;
-
-                if (item.summary.IndexOf("Bayrami") != -1)
-                    item.summary = item.summary.Replace("Bayrami", "Bayramı");
-                x.Add(y);
-                return x;
-            }).ToArray();
-
-            List<HolidayCostum> holidayCostum = holiday.items.GroupBy(x => new
-            {
-                x.summary,
-                startDate = DateTime.ParseExact(x.start.date, "yyyy-MM-dd", null).Year,
-            },
-            (key, g) => new
-            {
-                key.summary,
-                items = g,
-            }
-            ).Aggregate(new List<HolidayCostum>(), (x, y) =>
-            {
-                x.Add(new HolidayCostum
+                // Gets the current year public holidays
+                holiday.items = holiday.items.Where(x => (x.start.date.ToString().Split("-"))[0] == DateTime.Now.Year.ToString()).Aggregate(new List<Item>(), (x, y) =>
                 {
-                    summary = y.summary,
-                    start = new Start { date = y.items.First().start.date },
-                    end = new End { date = y.items.Count() > 2 ? y.items.Last().end.date : y.items.First().start.date }
-                });
-                return x;
-            });
+                    Item item = y;
+                    int ii = item.summary.ToLower().IndexOf("day");
+                    if (ii > 0)
+                        item.summary = item.summary.Substring(0, ii);
+                    else
+                        item.summary = item.summary;
 
-            return holidayCostum;
+                    if (item.summary.IndexOf("Bayrami") != -1)
+                        item.summary = item.summary.Replace("Bayrami", "Bayramı");
+                    x.Add(y);
+                    return x;
+                }).ToArray();
+
+                List<HolidayCostum> holidayCostum = holiday.items.GroupBy(x => new
+                {
+                    x.summary,
+                    startDate = DateTime.ParseExact(x.start.date, "yyyy-MM-dd", null).Year,
+                },
+                (key, g) => new
+                {
+                    key.summary,
+                    items = g,
+                }
+                ).Aggregate(new List<HolidayCostum>(), (x, y) =>
+                {
+                    x.Add(new HolidayCostum
+                    {
+                        summary = y.summary,
+                        start = new Start { date = y.items.First().start.date },
+                        end = new End { date = y.items.Count() > 2 ? y.items.Last().end.date : y.items.First().start.date }
+                    });
+                    return x;
+                });
+
+                return holidayCostum;
+            }
+            return null;
         }
     }
 
