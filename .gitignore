@@ -262,3 +262,10 @@ __pycache__/
 
 # Custom
 CuriousApp/Persistence/Migrations
+*.cache
+*.cache
+*.cache
+*.json
+*.props
+*.json
+*.cache
