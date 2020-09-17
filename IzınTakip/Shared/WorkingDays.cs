@@ -15,12 +15,13 @@ namespace IzinTakip.UI.Shared
         public List<HolidayCostum> PublicHolidayDates = new List<HolidayCostum>();//Resmi tatilleri ekleyeceğimiz listemizi oluşturuyoruz.
         List<HolidayCostum> PublicHolidays = new List<HolidayCostum>();
 
-        int publicHoliday = 0;
+        //int publicHolidayOld = 0;
         public int HolidaysAsync(DateTime sDate, DateTime eDate)
         {
-            if (PublicHoliday() != null)
+            var publicHoliday = PublicHoliday();
+            if (publicHoliday != null)
             {
-                PublicHolidays = PublicHoliday();
+                PublicHolidays = publicHoliday;
                 foreach (var holidays in PublicHolidays)//Resmi tatil listemizi foreach ile geziyoruz
                 {
                     var startDate = Convert.ToDateTime(holidays.start.date);
@@ -63,17 +64,14 @@ namespace IzinTakip.UI.Shared
                     {
                         //if condition meets the requirenments we add the dates back to list.
                         tempPublicHolidays.Add(item);
-                        publicHoliday++;
+                        //publicHolidayOld++;
                     }
                 }
                 PublicHolidayDates = tempPublicHolidays;
-
-                // Substract public holidays.
-                int result = CalculateWorkingDays(sDate, eDate);
-
-                return result;
             }
-            return 0;
+            // Substract public holidays.
+            int result = CalculateWorkingDays(sDate, eDate);
+            return result;
         }
         private int CalculateWorkingDays(DateTime sDate, DateTime eDate)
         {
@@ -93,9 +91,19 @@ namespace IzinTakip.UI.Shared
         }
         public List<HolidayCostum> PublicHoliday()
         {
-            string jsonResult = new WebClient().
-                       DownloadString("https://www.googleapis.com/calendar/v3/calendars/turkish__tr%40holiday.calendar.google.com/events?key=AIzaSyAJcACw9-p9cgKbLkf7GlNpVhJdd7w9FCA");
-            
+            // check if connection is available!
+            string jsonResult = "";
+            try
+            {
+                Uri uri = new Uri("https://www.googleapis.com/calendar/v3/calendars/turkish__tr%40holiday.calendar.google.com/events?key=AIzaSyAJcACw9-p9cgKbLkf7GlNpVhJdd7w9FCA");
+                jsonResult = new TimedWebClient { Timeout = 600 }.DownloadString(uri);
+            }
+            catch (Exception ex)
+            {
+                jsonResult = null;
+                Console.WriteLine(ex.Message);
+            }
+
             if (!String.IsNullOrEmpty(jsonResult))
             {
                 var holiday = JsonConvert.DeserializeObject<Holiday>(jsonResult);
@@ -209,5 +217,24 @@ namespace IzinTakip.UI.Shared
         public End end { get; set; }
         public bool IsChecked { get; set; } = true;
     }
+
+    public class TimedWebClient : WebClient
+    {
+        // Timeout in milliseconds, default = 600,000 msec
+        public int Timeout { get; set; }
+
+        public TimedWebClient()
+        {
+            this.Timeout = 600000;
+        }
+
+        protected override WebRequest GetWebRequest(Uri address)
+        {
+            var objWebRequest = base.GetWebRequest(address);
+            objWebRequest.Timeout = this.Timeout;
+            return objWebRequest;
+        }
+    }
+
     #endregion
 }

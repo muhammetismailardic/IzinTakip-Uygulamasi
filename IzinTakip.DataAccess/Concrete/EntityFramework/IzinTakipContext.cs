@@ -22,8 +22,8 @@ namespace IzinTakip.DataAccess.Concrete.EntityFramework
             if (!optionsBuilder.IsConfigured)
             {
                 //optionsBuilder.UseSqlServer(@"Server=DESKTOP-6MBABS7\SQLEXPRESS;Database=IzinTakip; User=sa; Password=ikikerekiki69!;");
-                optionsBuilder.UseSqlServer(@"Server=DESKTOP-6MBABS7\SQLEXPRESS;Database=IzinTakipTest; User=sa; Password=ikikerekiki69!;");
-                //optionsBuilder.UseSqlServer(@"Server=DESKTOP-UEVCS24\SQLEXPRESS;Database=IzinTakipTest;Trusted_Connection=True;Integrated Security=true;");
+                //optionsBuilder.UseSqlServer(@"Server=DESKTOP-6MBABS7\SQLEXPRESS;Database=IzinTakipTest; User=sa; Password=ikikerekiki69!;");
+                optionsBuilder.UseSqlServer(@"Server=DESKTOP-UEVCS24\SQLEXPRESS;Database=IzinTakipTest;Trusted_Connection=True;Integrated Security=true;");
             }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -139,9 +139,8 @@ namespace IzinTakip.UI.Controllers
                     }
                 }
                 int totalUsedDate = annualLeaveViewModel.CurrentUsedDate - counter;
-
+                annualLeaveViewModel.EmployeeAnnualDetails.LeftDate -= (totalUsedDate - annualLeaveViewModel.EmployeeAnnualDetails.Used);
                 annualLeaveViewModel.EmployeeAnnualDetails.Used = totalUsedDate;
-                annualLeaveViewModel.EmployeeAnnualDetails.LeftDate -= totalUsedDate;
 
                 await _employeeAnnualDetailsService.UpdateAsync(annualLeaveViewModel.EmployeeAnnualDetails);
 
@@ -178,8 +177,7 @@ namespace IzinTakip.UI.Controllers
                 try
                 {
                     int currentUsedDate = calworkingDays.HolidaysAsync(employeeDetails.StartDate, employeeDetails.EndDate);
-                    employeeDetails.LeftDate -= (currentUsedDate - employeeDetails.Used);
-                    employeeDetails.Used = currentUsedDate;
+                    
                     employeeDetails.UpdatedAt = DateTime.Now;
 
                     employeeDetails.StartDate = employeeDetails.StartDate;
@@ -197,6 +195,9 @@ namespace IzinTakip.UI.Controllers
                     }
                     else
                     {
+                        employeeDetails.LeftDate -= (currentUsedDate - employeeDetails.Used);
+                        employeeDetails.Used = currentUsedDate;
+
                         await _employeeAnnualDetailsService.UpdateAsync(employeeDetails);
                         return RedirectToAction(nameof(Index), new { empId = employeeDetails.EmployeesId });
                     }
