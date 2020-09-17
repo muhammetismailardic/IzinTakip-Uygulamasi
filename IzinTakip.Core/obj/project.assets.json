@@ -637,23 +637,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\MKM-Ismail\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\mardi\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Yedek\\Benim\\Projects\\IzinTakip\\IzinTakip.Core\\IzinTakip.Core.csproj",
+      "projectUniqueName": "C:\\Projects\\IzinTakip\\IzinTakip.Core\\IzinTakip.Core.csproj",
       "projectName": "IzinTakip.Core",
-      "projectPath": "D:\\Yedek\\Benim\\Projects\\IzinTakip\\IzinTakip.Core\\IzinTakip.Core.csproj",
-      "packagesPath": "C:\\Users\\MKM-Ismail\\.nuget\\packages\\",
-      "outputPath": "D:\\Yedek\\Benim\\Projects\\IzinTakip\\IzinTakip.Core\\obj\\",
+      "projectPath": "C:\\Projects\\IzinTakip\\IzinTakip.Core\\IzinTakip.Core.csproj",
+      "packagesPath": "C:\\Users\\mardi\\.nuget\\packages\\",
+      "outputPath": "C:\\Projects\\IzinTakip\\IzinTakip.Core\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\MKM-Ismail\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\mardi\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.2.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -699,7 +695,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
       }
     }
   }
