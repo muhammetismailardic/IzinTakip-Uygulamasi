@@ -46,17 +46,17 @@ namespace IzinTakip.UI.Controllers
                 {
                     item.YearlyAnnualRightCount = 0;
                 }
-                else if (value >= 1 && value <= 5)
+                else if (value >= 1 && value <= 6)
                 {
-                    item.YearlyAnnualRightCount = 14;
+                    item.YearlyAnnualRightCount = 12;
                 }
-                else if (value > 5 && value >= 10)
+                else if (value >= 7 && value <= 10)
                 {
-                    item.YearlyAnnualRightCount = 21;
+                    item.YearlyAnnualRightCount = 18;
                 }
                 else
                 {
-                    item.YearlyAnnualRightCount = 30;
+                    item.YearlyAnnualRightCount = 24;
                 }
 
                 var updateEmployee = await _employeeService.FindEmployeeByIdAsync(item.Id);
@@ -72,17 +72,17 @@ namespace IzinTakip.UI.Controllers
                 int sum = 0;
                 for (int i = 1; i <= value; i++)
                 {
-                    if (i >= 1 && i <= 5)
+                    if (i >= 1 && i <= 6)
                     {
-                        sum += 14;
+                        sum += 12;
                     }
-                    else if (i > 5 && i <= 15)
+                    else if (i >= 7 && i <= 10)
                     {
-                        sum += 21;
+                        sum += 18;
                     }
                     else if (i > 15)
                     {
-                        sum += 21;
+                        sum += 24;
                     }
                 }
                 updateEmployee.TotalAnnualRight = sum;
@@ -90,8 +90,9 @@ namespace IzinTakip.UI.Controllers
                 // If there is special leave it will add to total leave count.
                 if (empSpecialLeave.Count != 0)
                 {
-                    updateEmployee.TotalAnnualRight += empSpecialLeave.Sum(x => x.Count);
-                    updateEmployee.UsedTotalLeaves = empSpecialLeave.Sum(x => x.Count);
+                    // Farklı bi yerde kullanılacak
+                    //updateEmployee.TotalAnnualRight += empSpecialLeave.Sum(x => x.Count);
+                    //updateEmployee.UsedTotalLeaves = empSpecialLeave.Sum(x => x.Count);
 
                     // Displays whether user active or not
                     var IsTrue = empSpecialLeave.Where(x => x.IsOnLeave == true)
@@ -111,14 +112,15 @@ namespace IzinTakip.UI.Controllers
                     if (IsEmpDetailTrue != null && IsEmpDetailTrue.IsOnLeave) { updateEmployee.IsOnLeave = true; }
                 }
 
-                updateEmployee.UsedTotalLeaves += item.EmployeeAnnualDetails.Sum(totalUsed => totalUsed.Used);
+                //Burası değiştirildi
+                updateEmployee.UsedTotalLeaves = item.EmployeeAnnualDetails.Sum(totalUsed => totalUsed.Used);
                 updateEmployee.AvailableTotalLeaves = updateEmployee.TotalAnnualRight - updateEmployee.UsedTotalLeaves;
 
                 //Adding total Leaves and Used counts to Index table
                 await _employeeService.UpdateAsync(updateEmployee);
             }
             // it will return the lates status after updates.
-            return View((await _employeeService.GetAllEmployeesAsync()).Where(x => x.IsActive == true).ToList());
+            return View((await _employeeService.GetAllEmployeesAsync()).Where(x => x.IsActive == true).OrderBy(x => x.Name).ToList());
         }
         public async Task<IActionResult> Details(int? id)
         {
@@ -164,17 +166,17 @@ namespace IzinTakip.UI.Controllers
                 {
                     employee.YearlyAnnualRightCount = 0;
                 }
-                else if (value >= 1 && value <= 5)
+                else if (value >= 1 && value <= 6)
                 {
-                    employee.YearlyAnnualRightCount = 14;
+                    employee.YearlyAnnualRightCount = 12;
                 }
-                else if (value < 5 && value >= 10)
+                else if (value >= 7 && value <= 10)
                 {
-                    employee.YearlyAnnualRightCount = 21;
+                    employee.YearlyAnnualRightCount = 18;
                 }
                 else
                 {
-                    employee.YearlyAnnualRightCount = 30;
+                    employee.YearlyAnnualRightCount = 24;
                 }
 
                 await _employeeService.CreateAsync(employee);

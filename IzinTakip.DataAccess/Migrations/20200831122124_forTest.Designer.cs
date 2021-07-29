@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IzinTakip.DataAccess.Migrations
 {
     [DbContext(typeof(IzinTakipContext))]
-    [Migration("20200914130924_test")]
-    partial class test
+    [Migration("20200831122124_forTest")]
+    partial class forTest
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

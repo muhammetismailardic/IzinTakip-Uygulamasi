@@ -27,6 +27,7 @@ namespace IzinTakip.UI.Controllers
         public async Task<IActionResult> Index(int empId)
         {
             var empAnnualDetails = await _employeeAnnualDetailsService.GetAllEmployeeAnnualDetailsByIdAsync(empId);
+            var getEmpName = await _employeeService.FindEmployeeByIdAsync(empId);
 
             if (empAnnualDetails.Count != 0)
             {
@@ -41,8 +42,8 @@ namespace IzinTakip.UI.Controllers
                     await _employeeAnnualDetailsService.UpdateAsync(item);
                 }
             }
-
-            return View(empAnnualDetails);
+            ViewData["WorkerName"] = "Worker Name: " + getEmpName.Name;
+            return View(empAnnualDetails.OrderBy(x=> x.StartDate.Year).ToList());
         }
 
         [HttpGet]

@@ -35,7 +35,7 @@ namespace IzinTakip.UI.Controllers
                     await _employeeSpecialLeave.UpdateAsync(item);
                 }
             }
-            return View(empSpecialLeaveDetails);
+            return View(empSpecialLeaveDetails.OrderBy(x=> x.StartDate).ToList());
         }
 
         [HttpGet]
@@ -50,10 +50,16 @@ namespace IzinTakip.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                int currentUsedDate = calworkingDays.HolidaysAsync(employeeSpecialLeave.StartDate, employeeSpecialLeave.EndDate);
+                // If selected date is more than one day
+                int currentUsedDate = 0;
+                var result = employeeSpecialLeave.EndDate.Date.Subtract(employeeSpecialLeave.StartDate.Date);
+                if (result.Days > 0)
+                {
+                    currentUsedDate = calworkingDays.HolidaysAsync(employeeSpecialLeave.StartDate, employeeSpecialLeave.EndDate);
+                }
 
                 employeeSpecialLeave.StartDate = employeeSpecialLeave.StartDate;
-                employeeSpecialLeave.EndDate = employeeSpecialLeave.EndDate.AddHours(23).AddMinutes(59);
+                employeeSpecialLeave.EndDate = employeeSpecialLeave.EndDate;//employeeSpecialLeave.EndDate.AddHours(23).AddMinutes(59);
                 employeeSpecialLeave.CreatedAt = DateTime.Now;
                 employeeSpecialLeave.UpdatedAt = DateTime.Now;
 
@@ -71,6 +77,17 @@ namespace IzinTakip.UI.Controllers
                 else
                 {
                     employeeSpecialLeave.Count = currentUsedDate;
+
+                    if (employeeSpecialLeave.Count >= 2)
+                    {
+                        employeeSpecialLeave.Hours = "*";
+                    }
+                    else
+                    {
+                        var getHours = employeeSpecialLeave.EndDate - employeeSpecialLeave.StartDate;
+                        employeeSpecialLeave.Hours = getHours.ToString();//String.Format("{0}", getHours.TotalHours, "hours");
+                    }
+
                 }
 
                 await _employeeSpecialLeave.CreateAsync(employeeSpecialLeave);
@@ -92,7 +109,20 @@ namespace IzinTakip.UI.Controllers
                         counter++;
                     }
                 }
+                //Adding Dates
                 annualLeaveViewModel.EmployeeSpecialLeaves.Count = annualLeaveViewModel.CurrentUsedDate - counter;
+
+                //Adding Hours
+                if (annualLeaveViewModel.EmployeeSpecialLeaves.Count >= 2)
+                {
+                    annualLeaveViewModel.EmployeeSpecialLeaves.Hours = "*";
+                }
+                else
+                {
+                    var getHours = annualLeaveViewModel.EmployeeSpecialLeaves.EndDate - annualLeaveViewModel.EmployeeSpecialLeaves.StartDate;
+                    annualLeaveViewModel.EmployeeSpecialLeaves.Hours = String.Format("{0}", getHours.TotalHours, "hours");
+                }
+
                 await _employeeSpecialLeave.CreateAsync(annualLeaveViewModel.EmployeeSpecialLeaves);
 
                 return RedirectToAction("Index", "SpecialLeave", new { empId = annualLeaveViewModel.EmployeeSpecialLeaves.EmployeeId });
@@ -124,10 +154,16 @@ namespace IzinTakip.UI.Controllers
             {
                 try
                 {
-                    int currentUsedDate = calworkingDays.HolidaysAsync(employeeSpecialLeave.StartDate, employeeSpecialLeave.EndDate);
+                    // If selected date is more than one day
+                    int currentUsedDate = 0;
+                    var result = employeeSpecialLeave.EndDate.Date.Subtract(employeeSpecialLeave.StartDate.Date);
+                    if (result.Days > 0)
+                    {
+                        currentUsedDate = calworkingDays.HolidaysAsync(employeeSpecialLeave.StartDate, employeeSpecialLeave.EndDate);
+                    }
 
                     employeeSpecialLeave.StartDate = employeeSpecialLeave.StartDate;
-                    employeeSpecialLeave.EndDate = employeeSpecialLeave.EndDate.AddHours(23).AddMinutes(59);
+                    employeeSpecialLeave.EndDate = employeeSpecialLeave.EndDate;
                     employeeSpecialLeave.Count = currentUsedDate;
                     employeeSpecialLeave.UpdatedAt = DateTime.Now;
 
@@ -145,6 +181,17 @@ namespace IzinTakip.UI.Controllers
                     else
                     {
                         employeeSpecialLeave.Count = currentUsedDate;
+
+                        //Adding hours back
+                        if (employeeSpecialLeave.Count >= 2)
+                        {
+                            employeeSpecialLeave.Hours = "*";
+                        }
+                        else
+                        {
+                            var getHours = employeeSpecialLeave.EndDate - employeeSpecialLeave.StartDate;
+                            employeeSpecialLeave.Hours = getHours.ToString();//String.Format("{0}", getHours.TotalHours, "hours");
+                        }
                     }
 
                     await _employeeSpecialLeave.UpdateAsync(employeeSpecialLeave);
@@ -173,6 +220,18 @@ namespace IzinTakip.UI.Controllers
                     }
                 }
                 annualLeaveViewModel.EmployeeSpecialLeaves.Count = annualLeaveViewModel.CurrentUsedDate - counter;
+
+                //Adding hours back
+                if (annualLeaveViewModel.EmployeeSpecialLeaves.Count >= 2)
+                {
+                    annualLeaveViewModel.EmployeeSpecialLeaves.Hours = "*";
+                }
+                else
+                {
+                    var getHours = annualLeaveViewModel.EmployeeSpecialLeaves.EndDate - annualLeaveViewModel.EmployeeSpecialLeaves.StartDate;
+                    annualLeaveViewModel.EmployeeSpecialLeaves.Hours = String.Format("{0}", getHours.TotalHours, "hours");
+                }
+
                 await _employeeSpecialLeave.UpdateAsync(annualLeaveViewModel.EmployeeSpecialLeaves);
 
                 return RedirectToAction("Index", "SpecialLeave", new { empId = annualLeaveViewModel.EmployeeSpecialLeaves.EmployeeId });

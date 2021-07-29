@@ -160,6 +160,9 @@ namespace IzinTakip.DataAccess.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Hours")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsOnLeave")
                         .HasColumnType("bit");
 

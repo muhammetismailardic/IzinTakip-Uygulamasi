@@ -7,14 +7,6 @@ C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Core\obj\Debug\netcoreapp3.1\IzinTaki
 C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Core\obj\Debug\netcoreapp3.1\IzinTakip.Core.dll
 C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Core\obj\Debug\netcoreapp3.1\IzinTakip.Core.pdb
 C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Core\obj\Debug\netcoreapp3.1\IzinTakip.Core.csprojAssemblyReference.cache
-D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Core\bin\Debug\netcoreapp3.1\IzinTakip.Core.deps.json
-D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Core\bin\Debug\netcoreapp3.1\IzinTakip.Core.dll
-D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Core\bin\Debug\netcoreapp3.1\IzinTakip.Core.pdb
-D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Core\obj\Debug\netcoreapp3.1\IzinTakip.Core.AssemblyInfoInputs.cache
-D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Core\obj\Debug\netcoreapp3.1\IzinTakip.Core.AssemblyInfo.cs
-D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Core\obj\Debug\netcoreapp3.1\IzinTakip.Core.csproj.CoreCompileInputs.cache
-D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Core\obj\Debug\netcoreapp3.1\IzinTakip.Core.dll
-D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Core\obj\Debug\netcoreapp3.1\IzinTakip.Core.pdb
 C:\Projects\IzinTakip\IzinTakip.Core\bin\Debug\netcoreapp3.1\IzinTakip.Core.deps.json
 C:\Projects\IzinTakip\IzinTakip.Core\bin\Debug\netcoreapp3.1\IzinTakip.Core.dll
 C:\Projects\IzinTakip\IzinTakip.Core\bin\Debug\netcoreapp3.1\IzinTakip.Core.pdb
@@ -23,3 +15,12 @@ C:\Projects\IzinTakip\IzinTakip.Core\obj\Debug\netcoreapp3.1\IzinTakip.Core.Asse
 C:\Projects\IzinTakip\IzinTakip.Core\obj\Debug\netcoreapp3.1\IzinTakip.Core.csproj.CoreCompileInputs.cache
 C:\Projects\IzinTakip\IzinTakip.Core\obj\Debug\netcoreapp3.1\IzinTakip.Core.dll
 C:\Projects\IzinTakip\IzinTakip.Core\obj\Debug\netcoreapp3.1\IzinTakip.Core.pdb
+D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Core\bin\Debug\netcoreapp3.1\IzinTakip.Core.deps.json
+D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Core\bin\Debug\netcoreapp3.1\IzinTakip.Core.dll
+D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Core\bin\Debug\netcoreapp3.1\IzinTakip.Core.pdb
+D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Core\obj\Debug\netcoreapp3.1\IzinTakip.Core.csproj.AssemblyReference.cache
+D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Core\obj\Debug\netcoreapp3.1\IzinTakip.Core.AssemblyInfoInputs.cache
+D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Core\obj\Debug\netcoreapp3.1\IzinTakip.Core.AssemblyInfo.cs
+D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Core\obj\Debug\netcoreapp3.1\IzinTakip.Core.csproj.CoreCompileInputs.cache
+D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Core\obj\Debug\netcoreapp3.1\IzinTakip.Core.dll
+D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Core\obj\Debug\netcoreapp3.1\IzinTakip.Core.pdb

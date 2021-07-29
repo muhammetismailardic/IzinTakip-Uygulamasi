@@ -10,7 +10,7 @@
             <form asp-action="Delete">
                 <input type="hidden" asp-for="Id" />
                 <button type="submit" class="btn btn-danger">Delete</button>
-                <a asp-action="Index" asp-route-id="@Model.Id" class="btn btn-default">Back to List</a>
+                <a asp-controller="SpecialLeave" asp-action="Index" asp-route-empId="@Model.EmployeeId" class="btn btn-default">Back to List</a>
             </form>
         </div>
     </div>

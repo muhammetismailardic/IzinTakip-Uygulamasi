@@ -1,0 +1,43 @@
+﻿@model IOrderedEnumerable<IzinTakip.Entities.Concrete.EmployeeAnnualDetails>
+
+
+
+<table id="myPopoverContent" class="table table-sm" hidden>
+    <thead>
+        <tr>
+            <th scope="col">Starts</th>
+            <td></td>
+            <th scope="col">Returns</th>
+            <td></td>
+            <th scope="col">Days</th>
+            <td></td>
+            <th scope="col">Hours</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item2 in @Model)
+        {
+        <tr>
+            <td scope="row">@item2.StartDate.ToString("dd-MM")</td>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+            <td scope="row">@item2.EndDate.ToString("dd-MM")</td>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+            <td scope="row">@item2.Used days</td>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+            <td scope="row">*</td>
+        </tr>
+        }
+        @*@foreach (var item2 in specialLeaves)
+        {
+        <tr>
+            <td scope="row">@item2.StartDate.ToString("dd-MM")</td>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+            <td scope="row">@item2.EndDate.ToString("dd-MM")</td>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+            <td scope="row">@item2.Count days</td>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+            <td scope="row">@item2.Hours</td>
+        </tr>*@
+        }
+    </tbody>
+</table>

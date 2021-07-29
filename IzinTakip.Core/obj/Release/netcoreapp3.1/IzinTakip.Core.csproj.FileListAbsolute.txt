@@ -7,3 +7,12 @@ C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Core\obj\Release\netcoreapp3.1\IzinTa
 C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Core\obj\Release\netcoreapp3.1\IzinTakip.Core.csproj.CoreCompileInputs.cache
 C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Core\obj\Release\netcoreapp3.1\IzinTakip.Core.dll
 C:\Users\MKM-Ismail\Source\Repos\IzinTakip.Core\obj\Release\netcoreapp3.1\IzinTakip.Core.pdb
+D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Core\bin\Release\netcoreapp3.1\IzinTakip.Core.deps.json
+D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Core\bin\Release\netcoreapp3.1\IzinTakip.Core.dll
+D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Core\bin\Release\netcoreapp3.1\IzinTakip.Core.pdb
+D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Core\obj\Release\netcoreapp3.1\IzinTakip.Core.AssemblyInfoInputs.cache
+D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Core\obj\Release\netcoreapp3.1\IzinTakip.Core.AssemblyInfo.cs
+D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Core\obj\Release\netcoreapp3.1\IzinTakip.Core.csproj.CoreCompileInputs.cache
+D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Core\obj\Release\netcoreapp3.1\IzinTakip.Core.dll
+D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Core\obj\Release\netcoreapp3.1\IzinTakip.Core.pdb
+D:\Yedek\Benim\Projects\IzinTakip\IzinTakip.Core\obj\Release\netcoreapp3.1\IzinTakip.Core.csproj.AssemblyReference.cache

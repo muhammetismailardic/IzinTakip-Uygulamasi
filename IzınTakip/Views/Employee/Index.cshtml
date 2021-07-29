@@ -2,14 +2,17 @@
 
 @{
     ViewData["Title"] = "Employee Index Page";
+    ViewData["WorkerName"] = "Welcome!";
     Layout = "_Layout";
+    ViewBag.popOverClickList = new List<string>();
+    ViewBag.popOverContentIdList = new List<string>();
 }
 
 <!-- Responsive table -->
 <div class="col-md-12">
     <div class="panel panel-default">
         <div class="panel-body">
-            <table id="index-table" class="display" style="width:100%">
+            <table id="index-table" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
                         @*<th data-hide="phone,tablet">Image</th>*@
@@ -17,19 +20,26 @@
                         <th data-toggle="true">Surname</th>
                         <th data-hide="phone,tablet">Recruitment</th>
                         <th data-hide="phone,tablet">Yearly Right</th>
-                        <th data-hide="phone,tablet">Right Total</th>
-                        <th data-hide="phone,tablet">Available Total</th>
-                        <th data-hide="phone,tablet">Used Total</th>
-                        <th data-hide="phone,tablet">Special Total</th>
+                        <th data-hide="phone,tablet">Total</th>
+                        <th data-hide="phone,tablet">Total Available</th>
+                        <th data-hide="phone,tablet">Total Used</th>
+                        <th data-hide="phone,tablet">Total Special [@DateTime.Now.Year]</th>
+                        <th data-hide="phone,tablet">Up Coming Leaves</th>
                         <th data-hide="phone,tablet">Status</th>
-                        <th data-hide="phone">Employee Leave</th>
-                        <th data-hide="phone">Special Leave</th>
+                        <th data-hide="phone">Employee Leave / Special Leave</th>
                         <th data-hide="phone">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
+                        var annualLeaves = item.EmployeeAnnualDetails
+                                    .Where(x => x.StartDate >= DateTime.Now && x.StartDate <= x.StartDate.AddDays(15))
+                                    .OrderBy(d => d.StartDate)
+                                    .ToList();
+
+                        var specialLeaves = item.EmployeeSpecialLeaves
+                                    .Where(x => x.StartDate >= DateTime.Now && x.StartDate <= x.StartDate.AddDays(15));
                         <tr>
                             @*<td>
                                     <img src="~/images/employee/@item.Image" class="img-fluid img-thumbnail" alt="Sheep" height="150" width="150" asp-append-version="true">
@@ -44,20 +54,92 @@
                                 @Html.DisplayFor(modelItem => item.RecruitmentDate.Year)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.YearlyAnnualRightCount)
+                                @if (item.YearlyAnnualRightCount == 12)
+                                {
+                                    item.YearlyAnnualRightCount = 14;
+                                }
+                                else if (item.YearlyAnnualRightCount == 18)
+                                {
+                                    item.YearlyAnnualRightCount = 21;
+                                }
+                                else if (item.YearlyAnnualRightCount == 24)
+                                {
+                                    item.YearlyAnnualRightCount = 28;
+                                }
+
+                                @Html.DisplayFor(modelItem => item.YearlyAnnualRightCount) days
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.TotalAnnualRight)
+                                @Html.DisplayFor(modelItem => item.TotalAnnualRight) days
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.AvailableTotalLeaves)
+                                @Html.DisplayFor(modelItem => item.AvailableTotalLeaves) days
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.UsedTotalLeaves)
+                                @Html.DisplayFor(modelItem => item.UsedTotalLeaves) days
                             </td>
                             <td>
-                                @item.EmployeeSpecialLeaves.Sum(x => x.Count).ToString()
+                                @{
+                                    var totalHours = TimeSpan.Zero;
+                                    TimeSpan value = TimeSpan.Zero;
+                                    foreach (var h in item.EmployeeSpecialLeaves.Where(d => d.StartDate.Year == DateTime.Now.Year))
+                                    {
+                                        if (h.Hours != null && TimeSpan.TryParse(h.Hours, out value))
+                                        {
+                                            totalHours += value;
+                                        }
+                                    }
+                                    var convertHoursToTimeSpan = (@item.EmployeeSpecialLeaves.Where(c => c.StartDate.Year == DateTime.Now.Year).Sum(h => h.Count) * 8);
+                                    TimeSpan hours = TimeSpan.FromHours(convertHoursToTimeSpan) + totalHours;
+                                }
+
+                                @item.EmployeeSpecialLeaves.Where(t => t.StartDate.Year == DateTime.Now.Year).Count() time | @Math.Round(hours.TotalHours,2) Hours
                             </td>
+
+                            @if (annualLeaves.Count() != 0 || specialLeaves.Count() != 0)
+                            {
+                                var popoverId = item.Id;
+                                ViewBag.popoverContentId = "myPopoverContent" + popoverId.ToString();
+                                ViewBag.popoverclikId = popoverId.ToString();
+                                ViewBag.popOverClickList.Add(ViewBag.popoverclikId);
+                                ViewBag.popOverContentIdList.Add(ViewBag.popoverContentId);
+
+                                <td><span class="label label-danger" data-toggle="@ViewBag.popoverclikId" data-trigger="hover" title="Upcoming Events" data-placement="bottom">Click to See Upcoming Events!</span></td>
+
+                                <ul id="@ViewBag.popoverContentId" hidden>
+                                    @{
+                                        int itm = 0;
+                                        foreach (var annLeaves in annualLeaves)
+                                        {
+                                            itm = int.Parse(@annualLeaves.ToList().IndexOf(annLeaves).ToString()) + 1;
+
+                                            <li><b>@itm .Leave(Annual)</b></li>
+                                            <li>@annLeaves.StartDate.ToString("dd-MM-yyyy")</li>
+                                            <li>@annLeaves.EndDate.ToString("dd-MM-yyyy")</li>
+                                            <li>@annLeaves.Used days</li>
+                                            <li>*</li>
+                                            <li>----------</li>
+                                        }
+
+                                        foreach (var specialLeave in specialLeaves)
+                                        {
+                                            itm = int.Parse(specialLeaves.ToList().IndexOf(specialLeave).ToString()) + itm + 1;
+
+                                            <li><b>@itm. Leave(Special)</b></li>
+                                            <li>@specialLeave.StartDate.ToString("dd-MM-yyyy")</li>
+                                            <li>@specialLeave.EndDate.ToString("dd-MM-yyyy")</li>
+                                            <li>@specialLeave.Count days</li>
+                                            <li>@specialLeave.Hours days</li>
+                                            <li>----------</li>
+                                        }
+                                    }
+                                </ul>
+                            }
+                            else
+                            {
+                                <td><span class="label label-primary">No Upcoming Events!</span></td>
+                            }
+
                             @{
                                 if (item.IsOnLeave == true)
                                 {
@@ -69,25 +151,55 @@
                                 }
                             }
                             <td>
-                                <a asp-controller="EmployeeDetails" asp-action="AddLeave" asp-route-empId="@item.Id">Add</a> |
-                                <a asp-controller="EmployeeDetails" asp-action="Index" asp-route-empId="@item.Id">View</a> |
-                            </td>
-                            <td>
-                                <a asp-controller="SpecialLeave" asp-action="Create" asp-route-empId="@item.Id">Create</a> |
-                                <a asp-controller="SpecialLeave" asp-action="Index" asp-route-empId="@item.Id">View</a> |
+                                <a asp-controller="EmployeeDetails" asp-action="AddLeave" asp-route-empId="@item.Id">Add</a> --
+                                <a asp-controller="EmployeeDetails" asp-action="Index" asp-route-empId="@item.Id">View All</a> &nbsp;&nbsp;&nbsp; |
+                                <a asp-controller="SpecialLeave" asp-action="Create" asp-route-empId="@item.Id">Add</a> --
+                                <a asp-controller="SpecialLeave" asp-action="Index" asp-route-empId="@item.Id">View All</a>
                             </td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success">Edit</a>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
                                     @*<a asp-action="Details" asp-route-id="@item.Id" class="btn btn-default">Details</a>*@
                                     <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
                                 </div>
                             </td>
                         </tr>
+
+
                     }
                 </tbody>
             </table>
+            @*<partial name="Partials/_Events" model="annualLeaves" />*@
         </div>
     </div>
 </div>
 <!-- /Responsive table -->
+
+<style>
+
+    /*.popover-warning {
+                background-color: #f0ad4e !important;
+            }
+
+            .popover-content, .popover-title {
+                background-color: #f0ad4e !important;
+            }*/
+
+    .popover-title {
+        background: #d9534f;
+        font-weight: bold;
+    }
+</style>
+
+@*<script>
+    $(document).ready(function () {
+        $('[data-toggle=popover]').popover({
+
+            content: $('#myPopoverContent 4').html(),
+            html: true
+
+        }).click(function () {
+            $(this).popover('show');
+        });
+    });
+</script>*@
