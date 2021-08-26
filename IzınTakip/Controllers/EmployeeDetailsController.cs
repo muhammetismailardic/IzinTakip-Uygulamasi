@@ -43,7 +43,7 @@ namespace IzinTakip.UI.Controllers
                 }
             }
             ViewData["WorkerName"] = "Worker Name: " + getEmpName.Name;
-            return View(empAnnualDetails.OrderBy(x=> x.StartDate.Year).ToList());
+            return View(empAnnualDetails.OrderBy(x => x.StartDate.Year).ToList());
         }
 
         [HttpGet]
@@ -67,11 +67,30 @@ namespace IzinTakip.UI.Controllers
                 var employeeDetails = await _employeeService.FindEmployeeByIdAsync(empId);
                 var allDataByEmp = await _employeeAnnualDetailsService.GetAllEmployeeAnnualDetailsByIdAsync(empId);
                 int currentUsedDate = calworkingDays.HolidaysAsync(employeeAnnualRights.StartDate, employeeAnnualRights.EndDate);
+                
+                // Calculation Annual Rights based on the selected date.
+                var recDate = employeeDetails.RecruitmentDate.Year;
+                int currentDate = employeeAnnualRights.StartDate.Year;
+                var value = currentDate - recDate;
+
+                if (value < 1)
+                {
+                    employeeAnnualRights.AnnualRights = 0;
+                }
+                else if (value >= 1 && value <= 5)
+                {
+                    employeeAnnualRights.AnnualRights = 12;
+                }
+                else if (value >= 6 && value <= 15)
+                {
+                    employeeAnnualRights.AnnualRights = 18;
+                }
+                else if (value > 15)
+                {
+                    employeeAnnualRights.AnnualRights = 24;
+                }
 
                 employeeAnnualRights.EmployeesId = empId;
-                employeeAnnualRights.AnnualRights = employeeDetails.YearlyAnnualRightCount;
-
-
                 employeeAnnualRights.StartDate = employeeAnnualRights.StartDate;
                 employeeAnnualRights.EndDate = employeeAnnualRights.EndDate.AddHours(23).AddMinutes(59);
 
@@ -177,12 +196,35 @@ namespace IzinTakip.UI.Controllers
             {
                 try
                 {
+                    var updateEmpYearlyRight = await _employeeService.FindEmployeeByIdAsync(employeeDetails.EmployeesId);
                     int currentUsedDate = calworkingDays.HolidaysAsync(employeeDetails.StartDate, employeeDetails.EndDate);
                     
                     employeeDetails.UpdatedAt = DateTime.Now;
-
                     employeeDetails.StartDate = employeeDetails.StartDate;
                     employeeDetails.EndDate = employeeDetails.EndDate.AddHours(23).AddMinutes(59);
+                    employeeDetails.AnnualRights = updateEmpYearlyRight.YearlyAnnualRightCount;
+
+                    // Calculation Annual Rights based on the selected date.
+                    var recDate = updateEmpYearlyRight.RecruitmentDate.Year;
+                    int currentDate = employeeDetails.StartDate.Year;
+                    var value = currentDate - recDate;
+
+                    if (value < 1)
+                    {
+                        employeeDetails.AnnualRights = 0;
+                    }
+                    else if (value >= 1 && value <= 5)
+                    {
+                        employeeDetails.AnnualRights = 12;
+                    }
+                    else if (value >= 6 && value <= 15)
+                    {
+                        employeeDetails.AnnualRights = 18;
+                    }
+                    else if (value > 15)
+                    {
+                        employeeDetails.AnnualRights = 24;
+                    }
 
                     if (calworkingDays.PublicHolidayDates.Count != 0)
                     {

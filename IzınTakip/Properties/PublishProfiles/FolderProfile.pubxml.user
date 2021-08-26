@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\MKM-Ismail\Desktop\test</_PublishTargetUrl>
-    <History>True|2021-07-29T06:28:51.4210652Z;True|2021-07-16T17:38:35.4783387+03:00;True|2021-07-16T14:36:58.8866981+03:00;True|2021-07-14T16:08:33.6779758+03:00;True|2021-07-14T09:18:59.9212177+03:00;False|2021-07-14T09:18:21.2863398+03:00;False|2021-07-14T09:15:35.4626842+03:00;False|2021-07-14T09:11:39.8394222+03:00;</History>
+    <History>True|2021-08-26T07:55:42.5227711Z;True|2021-08-25T11:58:01.2968009+03:00;True|2021-07-29T09:28:51.4210652+03:00;True|2021-07-16T17:38:35.4783387+03:00;True|2021-07-16T14:36:58.8866981+03:00;True|2021-07-14T16:08:33.6779758+03:00;True|2021-07-14T09:18:59.9212177+03:00;False|2021-07-14T09:18:21.2863398+03:00;False|2021-07-14T09:15:35.4626842+03:00;False|2021-07-14T09:11:39.8394222+03:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <File Include="Views/SpecialLeave/HasPublicHoliday.cshtml">

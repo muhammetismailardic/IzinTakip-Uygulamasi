@@ -46,15 +46,15 @@ namespace IzinTakip.UI.Controllers
                 {
                     item.YearlyAnnualRightCount = 0;
                 }
-                else if (value >= 1 && value <= 6)
+                else if (value >= 1 && value <= 5)
                 {
                     item.YearlyAnnualRightCount = 12;
                 }
-                else if (value >= 7 && value <= 10)
+                else if (value >= 6 && value <= 15)
                 {
                     item.YearlyAnnualRightCount = 18;
                 }
-                else
+                else if (value > 15)
                 {
                     item.YearlyAnnualRightCount = 24;
                 }
@@ -72,11 +72,15 @@ namespace IzinTakip.UI.Controllers
                 int sum = 0;
                 for (int i = 1; i <= value; i++)
                 {
-                    if (i >= 1 && i <= 6)
+                    if (value == 0)
+                    {
+                        sum = 0;
+                    }
+                    else if (i >= 1 && i <= 5)
                     {
                         sum += 12;
                     }
-                    else if (i >= 7 && i <= 10)
+                    else if (i >= 6 && i <= 15)
                     {
                         sum += 18;
                     }
@@ -95,21 +99,42 @@ namespace IzinTakip.UI.Controllers
                     //updateEmployee.UsedTotalLeaves = empSpecialLeave.Sum(x => x.Count);
 
                     // Displays whether user active or not
-                    var IsTrue = empSpecialLeave.Where(x => x.IsOnLeave == true)
-                                              .FirstOrDefault();
 
-                    if (IsTrue != null && IsTrue.IsOnLeave) { updateEmployee.IsOnLeave = true; }
+                    foreach (var spcLeaveStatus in empSpecialLeave)
+                    {
+                        if (spcLeaveStatus.StartDate <= DateTime.Now && spcLeaveStatus.EndDate >= DateTime.Now)
+                        {
+                            spcLeaveStatus.IsOnLeave = true;
+                        }
+                        else { spcLeaveStatus.IsOnLeave = false; }
+
+                        updateEmployee.IsOnLeave = spcLeaveStatus.IsOnLeave == true ? updateEmployee.IsOnLeave = true : updateEmployee.IsOnLeave = false;
+                    }
+
+                    //var IsTrue = empSpecialLeave.Where(x => x.IsOnLeave == true)
+                    //                          .FirstOrDefault();
+                    //if (IsTrue != null && IsTrue.IsOnLeave) { updateEmployee.IsOnLeave = true; }
                 }
                 else { updateEmployee.UsedTotalLeaves = 0; }
 
                 // Displays whether user active or not
                 if (item.EmployeeAnnualDetails.Count != 0)
                 {
-                    var IsEmpDetailTrue = item.EmployeeAnnualDetails
-                                                   .Where(x => x.IsOnLeave == true)
-                                                   .FirstOrDefault();
+                    //var IsEmpDetailTrue = item.EmployeeAnnualDetails
+                    //                               .Where(x => x.IsOnLeave == true)
+                    //                               .FirstOrDefault();
+                    //if (IsEmpDetailTrue != null && IsEmpDetailTrue.IsOnLeave) { updateEmployee.IsOnLeave = true; }
 
-                    if (IsEmpDetailTrue != null && IsEmpDetailTrue.IsOnLeave) { updateEmployee.IsOnLeave = true; }
+                    foreach (var empAnnuelDetail in item.EmployeeAnnualDetails)
+                    {
+                        if (empAnnuelDetail.StartDate <= DateTime.Now && empAnnuelDetail.EndDate >= DateTime.Now)
+                        {
+                            empAnnuelDetail.IsOnLeave = true;
+                        }
+                        else { empAnnuelDetail.IsOnLeave = false; }
+
+                        updateEmployee.IsOnLeave = empAnnuelDetail.IsOnLeave == true ? updateEmployee.IsOnLeave = true : updateEmployee.IsOnLeave = false;
+                    }
                 }
 
                 //Burası değiştirildi
