@@ -77,11 +77,11 @@ namespace IzinTakip.UI.Controllers
                 {
                     employeeAnnualRights.AnnualRights = 0;
                 }
-                else if (value >= 1 && value <= 5)
+                else if (value >= 1 && value <= 6)
                 {
                     employeeAnnualRights.AnnualRights = 12;
                 }
-                else if (value >= 6 && value <= 15)
+                else if (value > 6 && value <= 15)
                 {
                     employeeAnnualRights.AnnualRights = 18;
                 }
@@ -213,11 +213,11 @@ namespace IzinTakip.UI.Controllers
                     {
                         employeeDetails.AnnualRights = 0;
                     }
-                    else if (value >= 1 && value <= 5)
+                    else if (value >= 1 && value <= 6)
                     {
                         employeeDetails.AnnualRights = 12;
                     }
-                    else if (value >= 6 && value <= 15)
+                    else if (value > 6 && value <= 15)
                     {
                         employeeDetails.AnnualRights = 18;
                     }

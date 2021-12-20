@@ -46,11 +46,11 @@ namespace IzinTakip.UI.Controllers
                 {
                     item.YearlyAnnualRightCount = 0;
                 }
-                else if (value >= 1 && value <= 5)
+                else if (value >= 1 && value <= 6)
                 {
                     item.YearlyAnnualRightCount = 12;
                 }
-                else if (value >= 6 && value <= 15)
+                else if (value > 6 && value <= 15)
                 {
                     item.YearlyAnnualRightCount = 18;
                 }
@@ -76,11 +76,11 @@ namespace IzinTakip.UI.Controllers
                     {
                         sum = 0;
                     }
-                    else if (i >= 1 && i <= 5)
+                    else if (i >= 1 && i <= 6)
                     {
                         sum += 12;
                     }
-                    else if (i >= 6 && i <= 15)
+                    else if (i > 6 && i <= 15)
                     {
                         sum += 18;
                     }
@@ -195,7 +195,7 @@ namespace IzinTakip.UI.Controllers
                 {
                     employee.YearlyAnnualRightCount = 12;
                 }
-                else if (value >= 7 && value <= 10)
+                else if (value > 6 && value <= 15)
                 {
                     employee.YearlyAnnualRightCount = 18;
                 }
